@@ -1,0 +1,119 @@
+@import "tailwindcss";
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+
+  /* --color-base-100: oklch(98% 0.02 240);
+  --color-base-200: oklch(95% 0.03 240);
+  --color-base-300: oklch(92% 0.04 240);
+  --color-base-content: oklch(20% 0.05 240); */
+  --color-primary: "#8A33FD";
+  --color-primary-content: "#FFFFFF";
+  --color-secondary: "#3C4242";
+  --color-secondary-content: "#FFFFFF";
+  --color-accent: "#BEBCBD";
+  --color-accent-content: "#3C4242";
+  --color-neutral: "#807D7E";
+  --color-neutral-content: "#FFFFFF";
+  --color-base-100: "#FFFFFF";
+  --color-base-200: "#EDEEF2";
+  --color-base-300: "#F6F6F6";
+  --color-base-content: "#3C4242";
+  --color-info: "#3B82F6";
+  --color-success: "#22C55E";
+  --color-warning: "#F59E0B";
+  --color-error: "#EF4444";
+  /* border radius */
+  --radius-selector: 1rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+
+  /* base sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* border size */
+  --border: 1px;
+
+  /* effects */
+  --depth: 1;
+  --noise: 0;
+  /* Font sizes */
+  --text-heading: 56px;
+  --text-h1: 48px;
+  --text-h2: 40px;
+  --text-h3: 32px;
+  --text-h4: 24px;
+  --text-h5: 20px;
+  --text-h6: 18px;
+  --text-p: 16px;
+  --text-label: 14px;
+  --text-small: 12px;
+  --text-tiny: 10px;
+}
+/* Root variables for light theme */
+
+/* Apply to body */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+}
+
+/* Headings */
+h1 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h1);
+}
+h2 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h2);
+}
+h3 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h3);
+}
+h4 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h4);
+}
+h5 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h5);
+}
+h6 {
+  font-family: var(--font-body);
+  font-size: var(--text-h6);
+}
+
+/* Paragraphs, labels, small, tiny */
+p {
+  font-family: var(--font-body);
+  font-size: var(--text-p);
+}
+
+label {
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+}
+
+small {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+}
+
+.tiny {
+  font-family: var(--font-body);
+  font-size: var(--text-tiny);
+}
+
+/* Smooth color transitions for dark/light mode */
+body,
+nav,
+input,
+a,
+button {
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}
