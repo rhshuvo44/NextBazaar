@@ -40,7 +40,7 @@
   --depth: 1;
   --noise: 0;
   /* Font sizes */
-  --text-heading: 56px;
+  /* --text-heading: 56px;
   --text-h1: 48px;
   --text-h2: 40px;
   --text-h3: 32px;
@@ -50,7 +50,7 @@
   --text-p: 16px;
   --text-label: 14px;
   --text-small: 12px;
-  --text-tiny: 10px;
+  --text-tiny: 10px; */
 }
 /* Root variables for light theme */
 
@@ -61,52 +61,7 @@ body {
   font-family: var(--font-body);
 }
 
-/* Headings */
-h1 {
-  font-family: var(--font-heading);
-  font-size: var(--text-h1);
-}
-h2 {
-  font-family: var(--font-heading);
-  font-size: var(--text-h2);
-}
-h3 {
-  font-family: var(--font-heading);
-  font-size: var(--text-h3);
-}
-h4 {
-  font-family: var(--font-heading);
-  font-size: var(--text-h4);
-}
-h5 {
-  font-family: var(--font-heading);
-  font-size: var(--text-h5);
-}
-h6 {
-  font-family: var(--font-body);
-  font-size: var(--text-h6);
-}
 
-/* Paragraphs, labels, small, tiny */
-p {
-  font-family: var(--font-body);
-  font-size: var(--text-p);
-}
-
-label {
-  font-family: var(--font-body);
-  font-size: var(--text-label);
-}
-
-small {
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-}
-
-.tiny {
-  font-family: var(--font-body);
-  font-size: var(--text-tiny);
-}
 
 /* Smooth color transitions for dark/light mode */
 body,

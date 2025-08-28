@@ -6,7 +6,7 @@ const Deal = () => {
     <section>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
         {deals.map((deal, index) => (
-          <section key={index} className={`relative flex p-4 text-white h-96`}>
+          <div key={index} className={`relative flex p-4 text-white h-96`}>
             {/* Background wrapper */}
             <div className="absolute inset-0 ">
               <Image
@@ -51,7 +51,7 @@ const Deal = () => {
                 className={`font-rubik }`}
               />
             </div>
-          </section>
+          </div>
         ))}
       </div>
     </section>

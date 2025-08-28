@@ -10,6 +10,16 @@ export interface Banner {
     title: ReactNode;
     description: string;
 }
+export interface Deals {
+    src: string | StaticImageData;
+    brand: string;
+    title: ReactNode;
+    description: string;
+}
+export interface Arrivals {
+    src: string | StaticImageData;
+    title: string;
+}
 
 export interface BannerSectionProps {
     image: StaticImageData | string;
