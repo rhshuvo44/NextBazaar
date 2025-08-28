@@ -2,49 +2,38 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import {
-  FaBars,
-  FaHeart,
-  FaMoon,
-  FaShoppingCart,
-  FaUser,
-} from "react-icons/fa";
+import { useState } from "react";
+import { FaBars, FaHeart, FaShoppingCart, FaUser } from "react-icons/fa";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
-  const pathname = usePathname();
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [darkMode]);
+  const pathname = usePathname();
 
   // Function to check if link is active
   const isActive = (href: string) => pathname === href;
 
   return (
-    <nav className="bg-white dark:bg-darkBg shadow-md fixed top-0 left-0 w-full z-50">
+    <nav className="bg-base-200 shadow-md fixed top-0 left-0 w-full z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="#" className="text-2xl font-bold dark:text-lightText">
+          <Link href="#" className="text-2xl font-bold text-base-content">
             NextBazaar
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6 ml-10 text-darkText dark:text-lightText">
+          <div className="hidden md:flex space-x-6 ml-10 text-base-content">
             {["/", "/shop", "/men", "/women", "/combos", "/Joggers"].map(
               (href, i) => (
                 <Link
                   key={i}
                   href={href}
                   className={`hover:text-dark transition ${
-                    isActive(href) ? "text-dark font-bold" : "text-neutral"
+                    isActive(href)
+                      ? "text-primary font-bold"
+                      : "text-base-content"
                   }`}
                 >
                   {href === "/"
@@ -61,12 +50,12 @@ export default function Navbar() {
             <input
               type="text"
               placeholder="Search..."
-              className="w-full px-3 py-2 rounded-md bg-[#f6f6f6] dark:bg-gray-700 text-darkText dark:text-lightText focus:outline-none focus:ring-2 focus:ring-primary text-sm"
+              className="w-full px-3 py-2 rounded-md bg-base-100 dark:bg-gray-700  focus:outline-none focus:ring-2 focus:ring-primary text-sm"
             />
           </div>
 
           {/* Desktop Icons */}
-          <div className="hidden md:flex items-center space-x-6 text-darkText dark:text-lightText">
+          <div className="hidden md:flex items-center space-x-6 text-base-content">
             <FaHeart className="cursor-pointer text-xl" />
             <div className="relative cursor-pointer">
               <FaShoppingCart className="text-xl" />
@@ -75,12 +64,7 @@ export default function Navbar() {
               </span>
             </div>
             <FaUser className="cursor-pointer text-xl" />
-            <button
-              onClick={() => setDarkMode(!darkMode)}
-              className="text-sm bg-gray-300 dark:bg-gray-700 px-2 py-1 rounded"
-            >
-              <FaMoon />
-            </button>
+            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -97,8 +81,8 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden px-4 pb-4 space-y-4 bg-white dark:bg-darkBg">
-          <div className="flex flex-col space-y-2 text-base">
+        <div className="md:hidden px-4 pb-4 space-y-4 bg-base-200 text-base-content">
+          <div className="flex flex-col space-y-2 text-base-content">
             {["/", "/shop", "/about", "/contact"].map((href, i) => (
               <Link
                 key={i}
@@ -132,12 +116,7 @@ export default function Navbar() {
               </span>
             </div>
             <FaUser className="cursor-pointer" />
-            <button
-              onClick={() => setDarkMode(!darkMode)}
-              className="text-darkText dark:text-lightText"
-            >
-              <FaMoon />
-            </button>
+            <ThemeToggle />
           </div>
         </div>
       )}

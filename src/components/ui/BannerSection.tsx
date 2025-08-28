@@ -52,7 +52,7 @@ const BannerSection = ({
         {/* Subtitle */}
         {subtitle && (
           <h3
-            className="text-md sm:text-lg md:text-xl font-rubik mb-6 font-light"
+            className="text-md sm:text-lg md:text-xl mb-6 font-light"
             data-aos="fade-up"
             data-aos-duration="1200"
             data-aos-delay="400"
@@ -78,7 +78,7 @@ const BannerSection = ({
                 variant={btn.variant}
                 color={btn.color}
                 ariaLabel={btn.ariaLabel}
-                className={`font-rubik ${btn.className || ""}`}
+                className={`${btn.className || ""}`}
                 isSubmitting={btn.isSubmitting || false}
               />
             ))}

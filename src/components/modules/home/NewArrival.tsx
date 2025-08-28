@@ -37,7 +37,7 @@ const NewArrival = () => {
         >
           {arrivals.map(({ src, title }, index) => (
             <SwiperSlide key={index}>
-              <div className="card bg-base-100 shadow-sm h-60 w-64 ">
+              <div className="bg-base-100 shadow-sm h-60 w-64 ">
                 <figure className="h-48 w-full overflow-hidden">
                   <Image
                     src={src}
@@ -56,10 +56,10 @@ const NewArrival = () => {
         </Swiper>
 
         {/* Custom Nav Buttons */}
-        <button className="custom-prev absolute top-1/2 -left-4 z-10 text-xl text-neutral cursor-pointer">
+        <button className="custom-prev absolute top-1/2 -left-4 z-10 text-xl text-base-content cursor-pointer">
           <FaArrowLeft />
         </button>
-        <button className="custom-next absolute top-1/2 -right-4 z-10 text-xl text-neutral cursor-pointer">
+        <button className="custom-next absolute top-1/2 -right-4 z-10 text-xl text-base-content cursor-pointer">
           <FaArrowRight />
         </button>
       </div>

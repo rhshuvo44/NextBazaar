@@ -48,7 +48,6 @@ const Deal = () => {
                 variant={"outline"}
                 color={"primary"}
                 ariaLabel={"Explore Items"}
-                className={`font-rubik }`}
               />
             </div>
           </div>

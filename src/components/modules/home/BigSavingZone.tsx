@@ -5,7 +5,7 @@ const BigSavingZone = () => {
   return (
     <section className="py-10">
       <SectionTitle title="Big Saving Zone" />
-      <div className="grid grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {savingZone.slice(0, 3).map((item, index) => (
           <SavingZoneCard
             key={index}
@@ -18,7 +18,7 @@ const BigSavingZone = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-2 gap-10 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
         {savingZone.slice(-2).map((item, index) => (
           <SavingZoneCard
             key={index}
