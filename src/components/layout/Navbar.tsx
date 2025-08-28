@@ -28,7 +28,7 @@ export default function Navbar() {
   const isActive = (href: string) => pathname === href;
 
   return (
-    <nav className="bg-white dark:bg-darkBg shadow-md">
+    <nav className="bg-white dark:bg-darkBg shadow-md fixed top-0 left-0 w-full z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -38,7 +38,7 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6 ml-10 text-darkText dark:text-lightText">
-            {["/", "/shop", "/about", "/contact"].map((href, i) => (
+            {["/", "/shop", "/men", "/women", "/combos","/Joggers"].map((href, i) => (
               <Link
                 key={i}
                 href={href}
