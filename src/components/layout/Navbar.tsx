@@ -38,20 +38,22 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6 ml-10 text-darkText dark:text-lightText">
-            {["/", "/shop", "/men", "/women", "/combos","/Joggers"].map((href, i) => (
-              <Link
-                key={i}
-                href={href}
-                className={`hover:text-dark transition ${
-                  isActive(href) ? "text-dark font-bold" : "text-neutral"
-                }`}
-              >
-                {href === "/"
-                  ? "Home"
-                  : href.replace("/", "").charAt(0).toUpperCase() +
-                    href.slice(2)}
-              </Link>
-            ))}
+            {["/", "/shop", "/men", "/women", "/combos", "/Joggers"].map(
+              (href, i) => (
+                <Link
+                  key={i}
+                  href={href}
+                  className={`hover:text-dark transition ${
+                    isActive(href) ? "text-dark font-bold" : "text-neutral"
+                  }`}
+                >
+                  {href === "/"
+                    ? "Home"
+                    : href.replace("/", "").charAt(0).toUpperCase() +
+                      href.slice(2)}
+                </Link>
+              )
+            )}
           </div>
 
           {/* Desktop Search */}

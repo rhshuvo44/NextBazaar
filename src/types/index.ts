@@ -16,6 +16,12 @@ export interface Deals {
     title: ReactNode;
     description: string;
 }
+export interface SavingZone {
+    src: string | StaticImageData;
+    brand: string;
+    title: string;
+    description: string;
+}
 export interface Arrivals {
     src: string | StaticImageData;
     title: string;
@@ -48,4 +54,12 @@ export interface PolymorphicButtonProps {
     ariaLabel?: string;
     isSubmitting?: boolean;
     className?: string;
+}
+
+export interface SavingZoneCardProps {
+  src: string | StaticImageData;
+  title: string;
+  brand: string;
+  description: string;
+  className?: string;
 }

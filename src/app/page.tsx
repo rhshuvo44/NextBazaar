@@ -1,4 +1,5 @@
 import Banner from "@/components/modules/home/Banner";
+import BigSavingZone from "@/components/modules/home/BigSavingZone";
 import Deal from "@/components/modules/home/Deal";
 import NewArrival from "@/components/modules/home/NewArrival";
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
       <main className="max-w-7xl mx-auto p-10 w-full">
         <Deal />
         <NewArrival />
+        <BigSavingZone />
       </main>
     </>
   );

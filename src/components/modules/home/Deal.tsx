@@ -3,7 +3,7 @@ import { deals } from "@/DB/data";
 import Image from "next/image";
 const Deal = () => {
   return (
-    <section>
+    <section className="py-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
         {deals.map((deal, index) => (
           <div key={index} className={`relative flex p-4 text-white h-96`}>
