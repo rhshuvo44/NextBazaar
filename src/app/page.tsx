@@ -1,5 +1,6 @@
 import Banner from "@/components/modules/home/Banner";
 import BigSavingZone from "@/components/modules/home/BigSavingZone";
+import BrandsDeal from "@/components/modules/home/BrandsDeal";
 import CategoriesMen from "@/components/modules/home/CategoriesMen";
 import CategoriesWomen from "@/components/modules/home/CategoriesWomen";
 import Deal from "@/components/modules/home/Deal";
@@ -16,6 +17,7 @@ export default function Home() {
         <Fashion />
         <CategoriesMen />
         <CategoriesWomen />
+        <BrandsDeal />
       </main>
     </>
   );

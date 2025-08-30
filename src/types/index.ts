@@ -30,6 +30,10 @@ export interface Categories {
     src: string | StaticImageData;
     title: string;
 }
+export interface Clients {
+    src: string | StaticImageData;
+
+}
 
 export interface BannerSectionProps {
     image: StaticImageData | string;

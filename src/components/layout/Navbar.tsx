@@ -3,7 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { FaBars, FaHeart, FaShoppingCart, FaUser } from "react-icons/fa";
+import {
+  FaBars,
+  FaHeart,
+  FaSearch,
+  FaShoppingCart,
+  FaUser,
+} from "react-icons/fa";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
@@ -46,12 +52,13 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Search */}
-          <div className="hidden md:flex items-center w-1/3">
+          <div className="hidden md:flex items-center w-1/3 relative">
             <input
               type="text"
               placeholder="Search..."
-              className="w-full px-3 py-2 rounded-md bg-base-100 dark:bg-gray-700  focus:outline-none focus:ring-2 focus:ring-primary text-sm"
+              className="w-full pl-10 pr-3 py-2 rounded-md bg-base-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
             />
+            <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           </div>
 
           {/* Desktop Icons */}
@@ -63,7 +70,7 @@ export default function Navbar() {
                   isActive("/wishlist") ? "text-red-500" : "text-base-content"
                 } hover:bg-gray-200 hover:text-red-500`}
               >
-                <FaHeart className="cursor-pointer text-xl " />
+                <FaHeart className="cursor-pointer text-xl" />
               </div>
             </Link>
 
@@ -102,7 +109,7 @@ export default function Navbar() {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-darkText dark:text-lightText text-2xl"
+              className="text-2xl"
             >
               <FaBars />
             </button>
@@ -132,13 +139,16 @@ export default function Navbar() {
             ))}
           </div>
 
-          <input
-            type="text"
-            placeholder="Search..."
-            className="mt-4 w-full px-3 py-2 rounded-md bg-[#f6f6f6] dark:bg-gray-700 text-darkText dark:text-lightText focus:outline-none focus:ring-2 focus:ring-primary text-sm"
-          />
+          <div className="relative w-full mt-4">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="w-full pl-10 pr-3 py-2 rounded-md bg-base-100 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
+            />
+            <FaSearch className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400" />
+          </div>
 
-          <div className="flex justify-around text-xl mt-4 text-darkText dark:text-lightText">
+          <div className="flex justify-around text-xl mt-4">
             {/* Wishlist Icon */}
             <Link href="/wishlist">
               <div

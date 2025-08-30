@@ -1,19 +1,9 @@
 import Navbar from "@/components/layout/Navbar";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 // Import Swiper styles
-import "swiper/css";
 import Footer from "@/components/layout/Footer";
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import "swiper/css";
 
 export const metadata: Metadata = {
   title: "NextBazaar - Ecommerce Website Template (Apparels)",
@@ -28,9 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head></head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`antialiased`}>
         <Navbar />
         {children}
         <Footer />

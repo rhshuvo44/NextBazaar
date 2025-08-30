@@ -1,6 +1,6 @@
 import banner from "@/assets/images/404/1.jpg";
+import PolymorphicButton from "@/components/ui/PolymorphicButton";
 import Image from "next/image";
-import Link from "next/link";
 export default function Custom404() {
   return (
     <main className="flex-grow flex flex-col items-center justify-center p-4 text-center mt-10">
@@ -31,10 +31,14 @@ export default function Custom404() {
           The page you are looking for might have been removed or temporarily
           unavailable.
         </p>
-
-        <Link href="/">
-          <button className="btn btn-primary">Back to HomePage</button>
-        </Link>
+        <PolymorphicButton
+          text="Back to HomePage"
+          href="/"
+          variant="solid"
+          color="primary"
+          ariaLabel="Back to HomePage"
+          className="btn btn-primary"
+        />
       </div>
     </main>
   );

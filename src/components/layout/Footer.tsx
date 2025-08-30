@@ -1,3 +1,4 @@
+"use client";
 import apple from "@/assets/images/apple.png";
 import google from "@/assets/images/google.png";
 import Image from "next/image";
