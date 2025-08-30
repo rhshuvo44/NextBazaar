@@ -35,7 +35,7 @@ const BrandsDeal = () => {
         >
           {clients.map(({ src }, index) => (
             <SwiperSlide key={index}>
-              <div className="rounded-lg shadow-md transition-transform hover:scale-105 duration-300 p-4 h-32 cursor-pointer">
+              <div className="rounded-lg shadow-md transition-transform hover:scale-105 duration-300 p-4 h-32 cursor-pointer bg-white">
                 <figure className="">
                   <Image
                     src={src}

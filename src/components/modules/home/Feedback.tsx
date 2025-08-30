@@ -33,7 +33,7 @@ const Feedback = () => {
         >
           {feedbacks.map(({ src, name, description, rating }, index) => (
             <SwiperSlide key={index}>
-              <div className="h-72 card flex flex-col shadow-2xl p-4">
+              <div className="h-72 flex flex-col shadow-2xl p-4">
                 <div className="flex flex-row justify-between">
                   <div className="avatar">
                     <div className="w-16 rounded">
@@ -47,7 +47,7 @@ const Feedback = () => {
                   </p>
                 </div>
                 <div className="mt-3">
-                  <h3 className="card-title mb-2">{name}</h3>
+                  <h3 className=" mb-2">{name}</h3>
                   <p className="text-left text-sm">{description}</p>
                 </div>
               </div>

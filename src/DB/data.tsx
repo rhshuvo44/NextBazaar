@@ -3,9 +3,9 @@ import client2 from "@/assets/images/client/2.png";
 import client3 from "@/assets/images/client/3.png";
 import client4 from "@/assets/images/client/4.png";
 import client5 from "@/assets/images/client/5.png";
-import feedback1 from "@/assets/images/testomonial/1.png";
-import feedback2 from "@/assets/images/testomonial/2.png";
-import feedback3 from "@/assets/images/testomonial/3.png";
+import feedback1 from "@/assets/images/testimonial/1.png";
+import feedback2 from "@/assets/images/testimonial/2.png";
+import feedback3 from "@/assets/images/testimonial/3.png";
 import banner1 from "@/assets/images/home/1.jpg";
 import boxers from "@/assets/images/home/Boxers.jpg";
 import coatsParkas from "@/assets/images/home/CoatsParkas.png";
@@ -20,15 +20,15 @@ import boxersWomen from "@/assets/images/home/boxersWomen.png";
 import deal1 from "@/assets/images/home/deals.jpg";
 import deal2 from "@/assets/images/home/deals1.jpg";
 import hoodies1 from "@/assets/images/home/hoodie1.png";
-import planTShart from "@/assets/images/home/plan-t-shart.jpg";
-import poloTShart from "@/assets/images/home/polo-t-shart.jpg";
-import printTShart from "@/assets/images/home/print-t-shart.jpg";
+import planTShirt from "@/assets/images/home/plan-t-shirt.jpg";
+import poloTShirt from "@/assets/images/home/polo-t-shirt.jpg";
+import printTShirt from "@/assets/images/home/print-t-shirt.jpg";
 import savingZone1 from "@/assets/images/home/savingZone.jpg";
 import savingZone2 from "@/assets/images/home/savingZone2.jpg";
 import savingZone3 from "@/assets/images/home/savingZone3.jpg";
 import savingZone4 from "@/assets/images/home/savingZone4.jpg";
 import savingZone5 from "@/assets/images/home/savingZone5.jpg";
-import tShart from "@/assets/images/home/t-shart.jpg";
+import tShirt from "@/assets/images/home/t-shirt.jpg";
 import {
   Arrivals,
   Banner,
@@ -152,19 +152,19 @@ export const clients: Clients[] = [
 ];
 export const categoriesMen: Categories[] = [
   {
-    src: tShart,
+    src: tShirt,
     title: "T-Shirts",
   },
   {
-    src: printTShart,
+    src: printTShirt,
     title: "Printed T-Shirts",
   },
   {
-    src: planTShart,
+    src: planTShirt,
     title: "Plain T-Shirt",
   },
   {
-    src: poloTShart,
+    src: poloTShirt,
     title: "Polo T-Shirt",
   },
   {
@@ -177,7 +177,7 @@ export const categoriesMen: Categories[] = [
   },
   {
     src: arrivals1,
-    title: "Activewear",
+    title: "Active wear",
   },
   {
     src: boxers,
@@ -217,6 +217,13 @@ export const savingZone: SavingZone[] = [
   },
 ];
 export const feedbacks: Feedbacks[] = [
+  {
+    src: feedback1,
+    name: "Floyd Miles",
+    rating: 5,
+    description:
+      "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+  },
   {
     src: feedback1,
     name: "Floyd Miles",
