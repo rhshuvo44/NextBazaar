@@ -78,3 +78,9 @@ export type CategoryCardProps = {
     href?: string;
     showArrow?: boolean;
 }
+export type Feedbacks = {
+    src: string | StaticImageData;
+    name: string;
+    rating: number;
+    description: string;
+}
