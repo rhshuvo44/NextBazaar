@@ -30,7 +30,7 @@ export default function Navbar() {
                 <Link
                   key={i}
                   href={href}
-                  className={`hover:text-dark transition ${
+                  className={`hover:text-primary transition ${
                     isActive(href)
                       ? "text-primary font-bold"
                       : "text-base-content"
@@ -61,9 +61,9 @@ export default function Navbar() {
               <div
                 className={`p-2 rounded-full ${
                   isActive("/wishlist") ? "text-red-500" : "text-base-content"
-                } hover:bg-gray-200`}
+                } hover:bg-gray-200 hover:text-red-500`}
               >
-                <FaHeart className="cursor-pointer text-xl hover:text-red-500" />
+                <FaHeart className="cursor-pointer text-xl " />
               </div>
             </Link>
 
@@ -73,9 +73,9 @@ export default function Navbar() {
                 <div
                   className={`p-2 rounded-full ${
                     isActive("/cart") ? "text-blue-500" : "text-base-content"
-                  } hover:bg-gray-200`}
+                  } hover:bg-gray-200 hover:text-blue-500`}
                 >
-                  <FaShoppingCart className="text-xl cursor-pointer hover:text-blue-500" />
+                  <FaShoppingCart className="text-xl cursor-pointer " />
                 </div>
               </Link>
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
@@ -88,9 +88,9 @@ export default function Navbar() {
               <div
                 className={`p-2 rounded-full ${
                   isActive("/account") ? "text-green-500" : "text-base-content"
-                } hover:bg-gray-200`}
+                } hover:bg-gray-200 hover:text-green-500`}
               >
-                <FaUser className="cursor-pointer text-xl hover:text-green-500" />
+                <FaUser className="cursor-pointer text-xl " />
               </div>
             </Link>
 

@@ -1,5 +1,7 @@
 import Banner from "@/components/modules/home/Banner";
 import BigSavingZone from "@/components/modules/home/BigSavingZone";
+import CategoriesMen from "@/components/modules/home/CategoriesMen";
+import CategoriesWomen from "@/components/modules/home/CategoriesWomen";
 import Deal from "@/components/modules/home/Deal";
 import Fashion from "@/components/modules/home/Fashion";
 import NewArrival from "@/components/modules/home/NewArrival";
@@ -12,6 +14,8 @@ export default function Home() {
         <NewArrival />
         <BigSavingZone />
         <Fashion />
+        <CategoriesMen />
+        <CategoriesWomen />
       </main>
     </>
   );

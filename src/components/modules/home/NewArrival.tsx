@@ -1,7 +1,7 @@
 "use client";
+import CategoryCard from "@/components/ui/CategoryCard";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { arrivals } from "@/DB/data";
-import Image from "next/image";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -37,20 +37,7 @@ const NewArrival = () => {
         >
           {arrivals.map(({ src, title }, index) => (
             <SwiperSlide key={index}>
-              <div className="bg-base-100 shadow-sm h-60 w-64 ">
-                <figure className="h-48 w-full overflow-hidden">
-                  <Image
-                    src={src}
-                    alt={title}
-                    width={500}
-                    height={500}
-                    className="w-full h-full object-cover"
-                  />
-                </figure>
-                <div className="py-4 px-2">
-                  <h2 className="card-title text-base">{title}</h2>
-                </div>
-              </div>
+              <CategoryCard src={src} title={title} />
             </SwiperSlide>
           ))}
         </Swiper>

@@ -26,6 +26,10 @@ export interface Arrivals {
     src: string | StaticImageData;
     title: string;
 }
+export interface Categories {
+    src: string | StaticImageData;
+    title: string;
+}
 
 export interface BannerSectionProps {
     image: StaticImageData | string;
@@ -57,9 +61,16 @@ export interface PolymorphicButtonProps {
 }
 
 export interface SavingZoneCardProps {
-  src: string | StaticImageData;
-  title: string;
-  brand: string;
-  description: string;
-  className?: string;
+    src: string | StaticImageData;
+    title: string;
+    brand: string;
+    description: string;
+    className?: string;
+}
+
+export type CategoryCardProps = {
+    src: string | StaticImageData;
+    title: string;
+    href?: string;
+    showArrow?: boolean;
 }
