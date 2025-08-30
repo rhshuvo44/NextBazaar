@@ -3,6 +3,7 @@ import google from "@/assets/images/google.png";
 import Image from "next/image";
 import Link from "next/link";
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
   return (
     <footer className="bg-gray-800 text-gray-300 py-12 px-8">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -49,12 +50,12 @@ export default function Footer() {
             </li>
             <li>
               <Link href="#" className="hover:text-white">
-                euphoria Blog
+                nextbazaar Blog
               </Link>
             </li>
             <li>
               <Link href="#" className="hover:text-white">
-                euphoriastan
+                nextbazaar
               </Link>
             </li>
             <li>
@@ -121,7 +122,7 @@ export default function Footer() {
 
       <div className="border-t border-gray-700 mt-8 pt-8 text-center">
         <p className="text-sm text-gray-400">
-          Copyright © 2025 NextBazaar. All rights reserved.
+          Copyright © {currentYear} NextBazaar. All rights reserved.
         </p>
       </div>
     </footer>

@@ -15,7 +15,7 @@ export default function GlobalError({
 
   return (
     <html>
-      <body className="flex flex-col items-center justify-center h-screen text-center">
+      <body className="flex flex-col items-center justify-center min-h-screen text-center">
         <h1 className="text-4xl font-bold mb-4">Something went wrong!</h1>
         <p className="mb-6">{error.message}</p>
         <button

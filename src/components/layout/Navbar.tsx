@@ -55,15 +55,46 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Icons */}
-          <div className="hidden md:flex items-center space-x-6 text-base-content">
-            <FaHeart className="cursor-pointer text-xl" />
+          <div className="hidden md:flex items-center space-x-2 text-base-content">
+            {/* Wishlist Icon */}
+            <Link href="/wishlist">
+              <div
+                className={`p-2 rounded-full ${
+                  isActive("/wishlist") ? "text-red-500" : "text-base-content"
+                } hover:bg-gray-200`}
+              >
+                <FaHeart className="cursor-pointer text-xl hover:text-red-500" />
+              </div>
+            </Link>
+
+            {/* Shopping Cart Icon with count */}
             <div className="relative cursor-pointer">
-              <FaShoppingCart className="text-xl" />
+              <Link href="/cart">
+                <div
+                  className={`p-2 rounded-full ${
+                    isActive("/cart") ? "text-blue-500" : "text-base-content"
+                  } hover:bg-gray-200`}
+                >
+                  <FaShoppingCart className="text-xl cursor-pointer hover:text-blue-500" />
+                </div>
+              </Link>
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
                 2
               </span>
             </div>
-            <FaUser className="cursor-pointer text-xl" />
+
+            {/* User Account Icon */}
+            <Link href="/account">
+              <div
+                className={`p-2 rounded-full ${
+                  isActive("/account") ? "text-green-500" : "text-base-content"
+                } hover:bg-gray-200`}
+              >
+                <FaUser className="cursor-pointer text-xl hover:text-green-500" />
+              </div>
+            </Link>
+
+            {/* Theme Toggle (assuming it's a separate component) */}
             <ThemeToggle />
           </div>
 
@@ -108,14 +139,45 @@ export default function Navbar() {
           />
 
           <div className="flex justify-around text-xl mt-4 text-darkText dark:text-lightText">
-            <FaHeart className="cursor-pointer" />
+            {/* Wishlist Icon */}
+            <Link href="/wishlist">
+              <div
+                className={`p-2 rounded-full ${
+                  isActive("/wishlist") ? "text-red-500" : "text-base-content"
+                } hover:bg-gray-200`}
+              >
+                <FaHeart className="cursor-pointer text-xl hover:text-red-500" />
+              </div>
+            </Link>
+
+            {/* Shopping Cart Icon with count */}
             <div className="relative cursor-pointer">
-              <FaShoppingCart />
-              <span className="absolute -top-1 -right-1 text-xs bg-red-500 text-white rounded-full px-1">
+              <Link href="/cart">
+                <div
+                  className={`p-2 rounded-full ${
+                    isActive("/cart") ? "text-blue-500" : "text-base-content"
+                  } hover:bg-gray-200`}
+                >
+                  <FaShoppingCart className="text-xl cursor-pointer hover:text-blue-500" />
+                </div>
+              </Link>
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
                 2
               </span>
             </div>
-            <FaUser className="cursor-pointer" />
+
+            {/* User Account Icon */}
+            <Link href="/account">
+              <div
+                className={`p-2 rounded-full ${
+                  isActive("/account") ? "text-green-500" : "text-base-content"
+                } hover:bg-gray-200`}
+              >
+                <FaUser className="cursor-pointer text-xl hover:text-green-500" />
+              </div>
+            </Link>
+
+            {/* Theme Toggle (assuming it's a separate component) */}
             <ThemeToggle />
           </div>
         </div>
