@@ -6,6 +6,7 @@ import CategoriesWomen from "@/components/modules/home/CategoriesWomen";
 import Deal from "@/components/modules/home/Deal";
 import Fashion from "@/components/modules/home/Fashion";
 import Feedback from "@/components/modules/home/Feedback";
+import Limelight from "@/components/modules/home/Limelight";
 import NewArrival from "@/components/modules/home/NewArrival";
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <CategoriesMen />
         <CategoriesWomen />
         <BrandsDeal />
+        <Limelight />
         <Feedback />
       </main>
     </>

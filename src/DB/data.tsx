@@ -3,9 +3,6 @@ import client2 from "@/assets/images/client/2.png";
 import client3 from "@/assets/images/client/3.png";
 import client4 from "@/assets/images/client/4.png";
 import client5 from "@/assets/images/client/5.png";
-import feedback1 from "@/assets/images/testimonial/1.png";
-import feedback2 from "@/assets/images/testimonial/2.png";
-import feedback3 from "@/assets/images/testimonial/3.png";
 import banner1 from "@/assets/images/home/1.jpg";
 import boxers from "@/assets/images/home/Boxers.jpg";
 import coatsParkas from "@/assets/images/home/CoatsParkas.png";
@@ -28,7 +25,14 @@ import savingZone2 from "@/assets/images/home/savingZone2.jpg";
 import savingZone3 from "@/assets/images/home/savingZone3.jpg";
 import savingZone4 from "@/assets/images/home/savingZone4.jpg";
 import savingZone5 from "@/assets/images/home/savingZone5.jpg";
+import limelight0 from "@/assets/images/home/Limelight.jpg";
+import limelight1 from "@/assets/images/home/Limelight1.jpg";
+import limelight2 from "@/assets/images/home/Limelight2.jpg";
+import limelight3 from "@/assets/images/home/Limelight3.jpg";
 import tShirt from "@/assets/images/home/t-shirt.jpg";
+import feedback1 from "@/assets/images/testimonial/1.png";
+import feedback2 from "@/assets/images/testimonial/2.png";
+import feedback3 from "@/assets/images/testimonial/3.png";
 import {
   Arrivals,
   Banner,
@@ -36,6 +40,7 @@ import {
   Clients,
   Deals,
   Feedbacks,
+  Limelight,
   SavingZone,
 } from "@/types";
 export const homeBanner: Banner[] = [
@@ -182,6 +187,32 @@ export const categoriesMen: Categories[] = [
   {
     src: boxers,
     title: "Boxers",
+  },
+];
+export const limelight: Limelight[] = [
+  {
+    src: limelight0,
+    title: "Black Sweatshirt with ....",
+    brand: "Jhanvi’s  Brand",
+    price: "45.00",
+  },
+  {
+    src: limelight1,
+    title: "line Pattern Black H...",
+    brand: "AS’s  Brand",
+    price: "45.00",
+  },
+  {
+    src: limelight2,
+    title: "Black Shorts",
+    brand: "MM’s  Brand",
+    price: "45.00",
+  },
+  {
+    src: limelight3,
+    title: "Levender Hoodie with ....",
+    brand: "Nike’s  Brand",
+    price: "45.00",
   },
 ];
 export const savingZone: SavingZone[] = [

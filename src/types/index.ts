@@ -30,6 +30,12 @@ export interface Categories {
     src: string | StaticImageData;
     title: string;
 }
+export interface Limelight {
+    src: string | StaticImageData;
+    title: string;
+    price: string;
+    brand: string
+}
 export interface Clients {
     src: string | StaticImageData;
 
