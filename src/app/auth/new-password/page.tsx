@@ -4,7 +4,11 @@ import AuthLayout from "@/components/layout/AuthLayout";
 
 export default function Page() {
   return (
-    <AuthLayout imageSrc={newPass} title="Create New Password">
+    <AuthLayout
+      imageSrc={newPass}
+      title="Create New Password"
+      subTitle="Your new password must be different from previous used passwords."
+    >
       <NewPasswordForm />
     </AuthLayout>
   );

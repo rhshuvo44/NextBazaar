@@ -7,10 +7,12 @@ export default function AuthLayout({
   children,
   imageSrc,
   title,
+  subTitle,
 }: {
   children: ReactNode;
   imageSrc?: string | StaticImageData;
   title?: string;
+  subTitle?: string;
 }) {
   return (
     <div className="min-h-screen flex">
@@ -29,7 +31,10 @@ export default function AuthLayout({
       {/* Right side: form */}
       <div className="flex w-full lg:w-1/2">
         <div className="w-full p-8">
-          {title && <h1 className="text-3xl font-semibold mb-6">{title}</h1>}
+          {title && <h1 className="text-3xl font-semibold mb-2">{title}</h1>}
+          {subTitle && (
+            <p className="text-xs mb-6">{subTitle}</p>
+          )}
           {children}
         </div>
       </div>
