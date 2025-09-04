@@ -63,7 +63,7 @@ export interface PolymorphicButtonProps {
     onClick?: () => void;
     text: string;
     icon?: IconType;
-    variant?: "solid" | "outline";
+    variant?: "solid" | "outline" ;
     color?: "primary" | "info";
     ariaLabel?: string;
     isSubmitting?: boolean;

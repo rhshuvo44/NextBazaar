@@ -8,6 +8,7 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   error?: string;
   isPassword?: boolean;
+  placeholder?: string;
 };
 
 export function FormInput({ label, error, isPassword, ...rest }: Props) {
