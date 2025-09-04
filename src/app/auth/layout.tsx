@@ -1,7 +1,8 @@
+import "@/app/globals.css";
 export default function AuthRootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <section className="mt-16">{children}</section>;
+  return <section>{children}</section>;
 }

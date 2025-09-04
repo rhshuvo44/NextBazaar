@@ -1,8 +1,7 @@
-import Navbar from "@/components/layout/Navbar";
+import "@/app/globals.css";
 import type { Metadata } from "next";
-import "./globals.css";
 // Import Swiper styles
-import Footer from "@/components/layout/Footer";
+import NavbarFooterWrapper from "@/components/layout/NavbarFooterWrapper";
 import "swiper/css";
 
 export const metadata: Metadata = {
@@ -19,9 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <head></head>
       <body className={`antialiased`}>
-        <Navbar />
-        {children}
-        <Footer />
+        <NavbarFooterWrapper>{children}</NavbarFooterWrapper>
       </body>
     </html>
   );
