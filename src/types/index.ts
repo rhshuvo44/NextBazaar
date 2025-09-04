@@ -78,11 +78,14 @@ export interface SavingZoneCardProps {
     className?: string;
 }
 
-export type CategoryCardProps = {
+export type ProductCardProps = {
     src: string | StaticImageData;
     title: string;
     href?: string;
+    price?: string;
+    brand?: string;
     showArrow?: boolean;
+    wishlist?: boolean;
 }
 export type Feedbacks = {
     src: string | StaticImageData;

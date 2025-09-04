@@ -1,5 +1,5 @@
 "use client";
-import CategoryCard from "@/components/ui/CategoryCard";
+import CategoryCard from "@/components/ui/ProductCard";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { arrivals } from "@/DB/data";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
