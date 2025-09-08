@@ -13,7 +13,7 @@ export default function Products() {
         <Sidebar />
         <main className="col-span-12 md:col-span-9">
           <Tabs category="Joggers" />
-          <ProductGrid products={joggers} />
+          <ProductGrid products={joggers} loading />
         </main>
       </div>
       <SEOText
