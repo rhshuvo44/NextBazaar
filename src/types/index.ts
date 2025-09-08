@@ -22,20 +22,12 @@ export interface SavingZone {
     title: string;
     description: string;
 }
-export interface Arrivals {
-    src: string | StaticImageData;
-    title: string;
-}
+
 export interface Categories {
     src: string | StaticImageData;
     title: string;
 }
-export interface Limelight {
-    src: string | StaticImageData;
-    title: string;
-    price: string;
-    brand: string
-}
+
 export interface Clients {
     src: string | StaticImageData;
 
@@ -63,7 +55,7 @@ export interface PolymorphicButtonProps {
     onClick?: () => void;
     text: string;
     icon?: IconType;
-    variant?: "solid" | "outline" ;
+    variant?: "solid" | "outline";
     color?: "primary" | "info";
     ariaLabel?: string;
     isSubmitting?: boolean;
@@ -92,4 +84,12 @@ export type Feedbacks = {
     name: string;
     rating: number;
     description: string;
+}
+export interface Product {
+    id: number;
+    src: string | StaticImageData;
+    title: string;
+    brand?: string;
+    price?: string;
+    category: "Men" | "Women" | "Unisex" | "Featured" | "Combos" | "Joggers";
 }

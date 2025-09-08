@@ -1,7 +1,7 @@
 "use client";
 import CategoryCard from "@/components/ui/ProductCard";
 import SectionTitle from "@/components/ui/SectionTitle";
-import { arrivals } from "@/DB/data";
+import { products } from "@/DB/data";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -35,7 +35,7 @@ const NewArrival = () => {
           }}
           modules={[Navigation, Autoplay]}
         >
-          {arrivals.map(({ src, title }, index) => (
+          {products.slice(0, 10).map(({ src, title }, index) => (
             <SwiperSlide key={index}>
               <CategoryCard src={src} title={title} />
             </SwiperSlide>

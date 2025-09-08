@@ -16,7 +16,14 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const pathname = usePathname();
-
+  const navLinks = [
+    { path: "/", label: "Home" },
+    { path: "/shop", label: "Shop" },
+    { path: "/shop/men", label: "Men" },
+    { path: "/shop/women", label: "Women" },
+    { path: "/shop/combos", label: "Combos" },
+    { path: "/shop/joggers", label: "Joggers" },
+  ];
   // Function to check if link is active
   const isActive = (href: string) => pathname === href;
 
@@ -31,24 +38,22 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6 ml-10 text-base-content">
-            {["/", "/shop", "/men", "/women", "/combos", "/Joggers"].map(
-              (href, i) => (
-                <Link
-                  key={i}
-                  href={href}
-                  className={`hover:text-primary transition ${
-                    isActive(href)
-                      ? "text-primary font-bold"
-                      : "text-base-content"
-                  }`}
-                >
-                  {href === "/"
-                    ? "Home"
-                    : href.replace("/", "").charAt(0).toUpperCase() +
-                      href.slice(2)}
-                </Link>
-              )
-            )}
+            {navLinks.map((nav, i) => (
+              <Link
+                key={i}
+                href={nav.path}
+                className={`hover:text-primary transition ${
+                  isActive(nav.path)
+                    ? "text-primary font-bold"
+                    : "text-base-content"
+                }`}
+              >
+                {nav.path === "/"
+                  ? "Home"
+                  : nav.label.replace("/", "").charAt(0).toUpperCase() +
+                    nav.label.slice(1)}
+              </Link>
+            ))}
           </div>
 
           {/* Desktop Search */}
@@ -109,7 +114,7 @@ export default function Navbar() {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-2xl"
+              className="text-2xl cursor-pointer"
             >
               <FaBars />
             </button>
@@ -121,20 +126,20 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div className="md:hidden px-4 pb-4 space-y-4 bg-base-200 text-base-content">
           <div className="flex flex-col space-y-2 text-base-content">
-            {["/", "/shop", "/about", "/contact"].map((href, i) => (
+            {navLinks.map((nav, i) => (
               <Link
                 key={i}
-                href={href}
+                href={nav.path}
                 className={`block px-2 py-1 rounded ${
-                  isActive(href)
+                  isActive(nav.path)
                     ? "bg-primary text-white"
                     : "text-darkText dark:text-lightText hover:bg-gray-200 dark:hover:bg-gray-700"
                 }`}
               >
-                {href === "/"
+                {nav.path === "/"
                   ? "Home"
-                  : href.replace("/", "").charAt(0).toUpperCase() +
-                    href.slice(2)}
+                  : nav.label.replace("/", "").charAt(0).toUpperCase() +
+                    nav.label.slice(1)}
               </Link>
             ))}
           </div>

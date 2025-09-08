@@ -1,22 +1,29 @@
 import SectionTitle from "@/components/ui/SectionTitle";
-import React from "react";
-import { limelight } from "@/DB/data";
-const PriceTable = () => {
+import { Product } from "@/types";
+const PriceTable = ({
+  products,
+  title,
+  tableTitle,
+}: {
+  products: Product[];
+  title: string;
+  tableTitle: string;
+}) => {
   return (
     <div className=" py-10">
-      <SectionTitle title="Buy Women's Clothing at Best Price" />
+      <SectionTitle title={title} />
       <div className="overflow-x-auto ">
         <table className="table table-zebra">
           {/* head */}
           <thead>
             <tr className=" text-base-content">
-              <th>Women&apos;s Clothing</th>
+              <th>{tableTitle} Clothing</th>
               <th>Best Price</th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
-            {limelight.map((item, index) => (
+            {products?.map((item, index) => (
               <tr key={index}>
                 <td>{item.title}</td>
                 <td>${item.price}</td>

@@ -6,23 +6,24 @@ import Sidebar from "@/components/modules/shop/Sidebar";
 import Tabs from "@/components/modules/shop/Tabs";
 import { products } from "@/DB/data";
 export default function Products() {
+  const categoriesMen = products.filter((p) => p.category === "Men");
   return (
     <div>
       <div className="container mx-auto grid grid-cols-12 gap-8 px-6 py-10">
         <Sidebar />
         <main className="col-span-12 md:col-span-9">
-          <Tabs category="All" />
-          <ProductGrid products={products} />
+          <Tabs category="Men" />
+          <ProductGrid products={categoriesMen} />
         </main>
       </div>
       <SEOText
-        title="All Clothing at Best Price"
-        description="Discover the best deals on women's clothing at our online store."
+        title="All Men's Clothing at Best Price"
+        description="Discover the best deals on men's clothing at our online store."
       />
       <PriceTable
-        products={products}
-        title="All Clothing at Best Price"
-        tableTitle="All's"
+        products={categoriesMen}
+        title="All Men's Clothing at Best Price"
+        tableTitle="Men's"
       />
     </div>
   );
