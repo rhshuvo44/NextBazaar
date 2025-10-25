@@ -78,7 +78,7 @@ export const deals: Deals[] = [
     src: deal1,
     brand: "Low Price",
     title: "High Coziness",
-    description: "UPTO 50% OFF",
+    description: "UP TO 50% OFF",
   },
   {
     src: deal2,
@@ -110,41 +110,34 @@ export const savingZone: SavingZone[] = [
     src: savingZone1,
     brand: "Low Price",
     title: "High Coziness",
-    description: "UPTO 50% OFF",
+    description: "UP TO 50% OFF",
   },
   {
     src: savingZone2,
-    brand: "Beyoung Presents",
-    title: "Breezy Summer Style",
-    description: "UPTO 50% OFF",
+    brand: "Summer Essentials",
+    title: "Lightweight Tees",
+    description: "UP TO 30% OFF",
   },
   {
     src: savingZone3,
-    brand: "Beyoung Presents",
-    title: "Breezy Summer Style",
-    description: "UPTO 50% OFF",
+    brand: "Cozy Layers",
+    title: "Warm Hoodies",
+    description: "UP TO 40% OFF",
   },
   {
     src: savingZone4,
-    brand: "Beyoung Presents",
-    title: "Breezy Summer Style",
-    description: "UPTO 50% OFF",
+    brand: "Denim Edit",
+    title: "Classic Jeans",
+    description: "UP TO 35% OFF",
   },
   {
     src: savingZone5,
-    brand: "Beyoung Presents",
-    title: "Breezy Summer Style",
-    description: "UPTO 50% OFF",
+    brand: "Accessories",
+    title: "Must-Have Extras",
+    description: "UP TO 25% OFF",
   },
 ];
 export const feedbacks: Feedbacks[] = [
-  {
-    src: feedback1,
-    name: "Floyd Miles",
-    rating: 5,
-    description:
-      "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
-  },
   {
     src: feedback1,
     name: "Floyd Miles",
