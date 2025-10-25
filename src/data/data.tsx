@@ -84,7 +84,7 @@ export const deals: Deals[] = [
     src: deal2,
     brand: "Beyoung Presents",
     title: "Breezy Summer Style",
-    description: "UPTO 50% OFF",
+    description: "UP TO 50% OFF",
   },
 ];
 export const clients: Clients[] = [
