@@ -18,7 +18,7 @@ const ProductCard = ({
       className="
         bg-base-100 shadow-sm relative rounded-xl overflow-hidden
         transition-all duration-300 ease-in-out
-        hover:shadow-lg hover:-translate-y-1
+        hover:shadow-lg hover:-translate-y-1 z-10
       "
     >
       {/* Wishlist Icon (Product Mode) */}
