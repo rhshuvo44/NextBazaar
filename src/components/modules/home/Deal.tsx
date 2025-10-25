@@ -1,5 +1,5 @@
 import PolymorphicButton from "@/components/ui/PolymorphicButton";
-import { deals } from "@/DB/data";
+import { deals } from "@/data/data";
 import Image from "next/image";
 const Deal = () => {
   return (
@@ -11,7 +11,11 @@ const Deal = () => {
             <div className="absolute inset-0 ">
               <Image
                 src={deal.src}
-                alt={"Banner image"}
+                alt={
+                  deal.brand
+                    ? `${deal.brand} ${deal.title ?? "image"}`
+                    : `${deal.title ?? "image"}`
+                }
                 fill
                 priority
                 className="object-cover object-left-bottom"

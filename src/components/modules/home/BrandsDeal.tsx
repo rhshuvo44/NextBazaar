@@ -1,5 +1,5 @@
 "use client";
-import { clients } from "@/DB/data";
+import { clients } from "@/data/data";
 import Image from "next/image";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";

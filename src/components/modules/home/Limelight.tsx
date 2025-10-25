@@ -1,6 +1,6 @@
 import ProductCard from "@/components/ui/ProductCard";
 import SectionTitle from "@/components/ui/SectionTitle";
-import { products } from "@/DB/data";
+import { products } from "@/data/data";
 const Limelight = () => {
   return (
     <section className="py-10">

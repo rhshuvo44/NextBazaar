@@ -1,5 +1,5 @@
 import Categories from "@/components/ui/Categories";
-import { products } from "@/DB/data";
+import { products } from "@/data/data";
 
 const CategoriesMen = () => {
   const categoriesMen = products.filter((p) => p.category === "Men");

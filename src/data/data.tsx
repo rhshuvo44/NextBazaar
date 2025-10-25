@@ -54,23 +54,23 @@ export const homeBanner: Banner[] = [
   },
   {
     src: banner1,
-    brand: "T-shirt / Tops",
+    brand: "Jeans / Bottoms",
     title: (
       <>
-        Summer <br /> Value Pack
+        Denim <br /> Collection
       </>
     ),
-    description: "cool / colorful / comfy",
+    description: "trendy / durable / stylish",
   },
   {
     src: banner1,
-    brand: "T-shirt / Tops",
+    brand: "Shoes / Sneakers",
     title: (
       <>
-        Summer <br /> Value Pack
+        Step Up <br /> Your Style
       </>
     ),
-    description: "cool / colorful / comfy",
+    description: "comfortable / casual / fresh",
   },
 ];
 export const deals: Deals[] = [
@@ -175,24 +175,28 @@ export const products: Product[] = [
     src: arrivals1,
     title: "Knitted Joggers",
     category: "Unisex",
+    price: "45.00",
   },
   {
     id: 2,
     src: arrivals2,
     title: "Full Sleeve",
     category: "Unisex",
+    price: "45.00",
   },
   {
     id: 3,
     src: arrivals3,
     title: "Active T-Shirts",
     category: "Unisex",
+    price: "45.00",
   },
   {
     id: 4,
     src: arrivals4,
     title: "Urban Shirts",
     category: "Unisex",
+    price: "45.00",
   },
 
   // Women
@@ -201,24 +205,28 @@ export const products: Product[] = [
     src: TeesTShirt,
     title: "Tees & T-Shirt",
     category: "Women",
+    price: "45.00",
   },
   {
     id: 6,
     src: coatsParkas,
     title: "Coats & Parkas",
     category: "Women",
+    price: "45.00",
   },
   {
     id: 7,
     src: hoodies1,
     title: "Hoodies & Sweatshirts",
     category: "Women",
+    price: "45.00",
   },
   {
     id: 8,
     src: boxersWomen,
     title: "Boxers",
     category: "Women",
+    price: "45.00",
   },
 
   // Men
@@ -227,35 +235,41 @@ export const products: Product[] = [
     src: tShirt,
     title: "T-Shirts",
     category: "Men",
+    price: "45.00",
   },
   {
     id: 10,
     src: printTShirt,
     title: "Printed T-Shirts",
     category: "Men",
+    price: "45.00",
   },
   {
     id: 11,
     src: planTShirt,
     title: "Plain T-Shirt",
     category: "Men",
+    price: "45.00",
   },
   {
     id: 12,
     src: poloTShirt,
     title: "Polo T-Shirt",
     category: "Men",
+    price: "45.00",
   },
   {
     id: 13,
     src: hoodies,
     title: "Hoodies & Sweatshirts",
     category: "Men",
+    price: "45.00",
   },
   {
     id: 14,
     src: jeans,
     title: "Jeans",
+    price: "45.00",
     category: "Men",
   },
   {
@@ -263,12 +277,14 @@ export const products: Product[] = [
     src: arrivals1,
     title: "Active wear",
     category: "Men",
+    price: "45.00",
   },
   {
     id: 16,
     src: boxers,
     title: "Boxers",
     category: "Men",
+    price: "45.00",
   },
 
   // Limelight (Featured)

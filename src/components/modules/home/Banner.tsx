@@ -4,7 +4,7 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import BannerSection from "@/components/ui/BannerSection";
-import { homeBanner } from "@/DB/data";
+import { homeBanner } from "@/data/data";
 import { Autoplay, Pagination } from "swiper/modules";
 
 const Banner = () => {

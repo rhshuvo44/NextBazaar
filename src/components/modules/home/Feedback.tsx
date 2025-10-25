@@ -1,6 +1,6 @@
 "use client";
 import SectionTitle from "@/components/ui/SectionTitle";
-import { feedbacks } from "@/DB/data";
+import { feedbacks } from "@/data/data";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 import { Autoplay, Pagination } from "swiper/modules";
@@ -14,7 +14,7 @@ const Feedback = () => {
       <div className="h-80">
         <Swiper
           role="region"
-          aria-label="Home page banner carousel"
+          aria-label="Customer feedback carousel"
           autoplay={{
             delay: 5000,
             disableOnInteraction: false,
@@ -37,7 +37,13 @@ const Feedback = () => {
                 <div className="flex flex-row justify-between">
                   <div className="avatar">
                     <div className="w-16 rounded">
-                      <Image src={src} alt="" />
+                      <Image
+                        src={src}
+                        alt={`${name} avatar`}
+                        width={64}
+                        height={64}
+                        className="rounded"
+                      />
                     </div>
                   </div>
                   <p className="flex">

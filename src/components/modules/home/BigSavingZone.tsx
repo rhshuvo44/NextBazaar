@@ -1,6 +1,6 @@
 import SavingZoneCard from "@/components/ui/SavingZoneCard";
 import SectionTitle from "@/components/ui/SectionTitle";
-import { savingZone } from "@/DB/data";
+import { savingZone } from "@/data/data";
 const BigSavingZone = () => {
   return (
     <section className="py-10">

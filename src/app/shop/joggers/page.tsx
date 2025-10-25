@@ -4,7 +4,7 @@ import ProductGrid from "@/components/modules/shop/ProductGrid";
 import SEOText from "@/components/modules/shop/SEOText";
 import Sidebar from "@/components/modules/shop/Sidebar";
 import Tabs from "@/components/modules/shop/Tabs";
-import { products } from "@/DB/data";
+import { products } from "@/data/data";
 export default function Products() {
   const joggers = products.filter((p) => p.category === "Joggers");
   return (

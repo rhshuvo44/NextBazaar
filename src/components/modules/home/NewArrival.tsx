@@ -1,7 +1,7 @@
 "use client";
 import CategoryCard from "@/components/ui/ProductCard";
 import SectionTitle from "@/components/ui/SectionTitle";
-import { products } from "@/DB/data";
+import { products } from "@/data/data";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/navigation";
