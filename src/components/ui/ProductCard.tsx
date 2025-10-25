@@ -18,7 +18,7 @@ const ProductCard = ({
       className="
         bg-base-100 shadow-sm relative rounded-xl overflow-hidden
         transition-all duration-300 ease-in-out
-        hover:shadow-lg hover:-translate-y-1 z-10
+        hover:shadow-lg hover:-translate-y-1 
       "
     >
       {/* Wishlist Icon (Product Mode) */}
@@ -28,7 +28,7 @@ const ProductCard = ({
           className="
             bg-white absolute top-3 right-3 rounded-full p-2 shadow
             transition-colors duration-300
-            hover:bg-red-100 z-50 cursor-pointer
+            hover:bg-red-100 z-10 cursor-pointer
           "
         >
           <CiHeart
