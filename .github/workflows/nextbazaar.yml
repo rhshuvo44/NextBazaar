@@ -56,6 +56,10 @@ jobs:
       #     files: ./coverage/lcov.info
       #     fail_ci_if_error: false
 
+      # 8️⃣ Build Project (Next.js)
+      - name: Build project
+        run: npm run build
+
       # 9️⃣ End-to-End Tests (Playwright)
       - name: Run Playwright Tests
         run: |
@@ -82,10 +86,6 @@ jobs:
           npm run test:e2e
         env:
           BASE_URL: http://localhost:3000
-      # 8️⃣ Build Project (Next.js)
-      - name: Build project
-        run: npm run build
-
   deploy:
     name: Deploy to Vercel
     needs: test_and_build
