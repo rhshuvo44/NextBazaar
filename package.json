@@ -9,7 +9,11 @@
     "lint": "eslint",
     "type-check": "tsc --noEmit",
     "test": "jest",
+    "test:unit": "jest  --ci --coverage --testPathIgnorePatterns='__tests__/e2e/'",
     "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:ci": "playwright test --reporter=list",
+    "test:ci": "npm run test:unit && npm run test:e2e:ci",
     "check-case": "node scripts/checkCase.js"
   },
   "dependencies": {
