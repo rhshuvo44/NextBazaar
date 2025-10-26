@@ -33,7 +33,7 @@ playwright-report/
 *.trace
 
 # Editor/IDE
-.vscode/
+
 .idea/
 *.suo
 *.ntvs*
