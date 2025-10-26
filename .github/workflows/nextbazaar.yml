@@ -85,7 +85,7 @@ jobs:
           # Run E2E tests (trap will clean up even if this fails)
           npm run test:e2e
         env:
-          BASE_URL: http://localhost:3000
+          BASE_URL: http://localhost:3000 || https://next-bazaar-ashy.vercel.app/
 
   deploy:
     name: Deploy to Vercel
