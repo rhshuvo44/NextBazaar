@@ -1,6 +1,7 @@
 import PolymorphicButton from "@/components/ui/PolymorphicButton";
 import "@testing-library/jest-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
+import React from 'react';
 
 describe("PolymorphicButton", () => {
   test("renders button text", () => {
