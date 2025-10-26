@@ -66,17 +66,24 @@ jobs:
           # Install Playwright dependencies
           npx playwright install --with-deps
 
+          # Set up cleanup trap before starting the server
+          cleanup() {
+            if [ -f .nextserver.pid ]; then
+              echo "Cleaning up Next.js server..."
+              kill $(cat .nextserver.pid) 2>/dev/null || pkill -f "npm run start" || true
+              rm -f .nextserver.pid
+            fi
+          }
+          trap cleanup EXIT INT TERM
+
           # Start the Next.js server and capture its PID
           npm run start & echo $! > .nextserver.pid
 
           # Wait for the server to be ready
           npx wait-on tcp:3000
 
-          # Run E2E tests
+          # Run E2E tests (trap will clean up even if this fails)
           npm run test:e2e
-
-          # Stop the server using the saved PID
-          kill $(cat .nextserver.pid) || pkill -f "npm run start" || true
         env:
           BASE_URL: http://localhost:3000
 
