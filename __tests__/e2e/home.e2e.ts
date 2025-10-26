@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('Home Page', () => {
 
@@ -19,12 +19,7 @@ test.describe('Home Page', () => {
   test('Navigation Explore Items to Shop page', async ({ page }) => {
     await page.goto('/');
 
-    // Use exact text matching
-    // const ExploreItemsLink = page.locator('text="Explore Items"');
-    // await expect(ExploreItemsLink).toBeVisible({ timeout: 10000 });
-    // await ExploreItemsLink.click();
-
-    // Wait for a reliable element on the Shop page
+    // Wait for the "Explore Items" button on the Home page
     const exploreItemsButton = page.locator('a:has-text("Explore Items")').first();
     await expect(exploreItemsButton).toBeVisible({ timeout: 10000 });
 
