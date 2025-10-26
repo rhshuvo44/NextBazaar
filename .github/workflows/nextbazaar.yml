@@ -46,7 +46,7 @@ jobs:
 
       # 6️⃣ Unit & Integration Tests (Jest)
       - name: Run Jest Tests
-        run: npm test -- --ci --coverage
+        run: npm test:unit
 
       # 7️⃣ Upload test coverage to Codecov (optional but recommended)
       # - name: Upload Coverage Report
