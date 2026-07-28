@@ -1,17 +1,34 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { FormInput } from "../form/FormInput";
 import { SocialButtons } from "../ui/SocialButtons";
+import { api, setToken } from "@/lib/api";
+
 export default function SignInForm() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
+    setError("");
     setLoading(true);
-    // TODO: call your API
-    setTimeout(() => setLoading(false), 800);
+
+    const form = e.currentTarget as HTMLFormElement;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const password = (form.elements.namedItem("password") as HTMLInputElement).value;
+
+    const res = await api.auth.signin({ email, password });
+    if (res.success && res.data) {
+      setToken(res.data.token);
+      router.push("/");
+    } else {
+      setError(res.error || "Invalid email or password");
+    }
+    setLoading(false);
   }
 
   return (
@@ -23,6 +40,7 @@ export default function SignInForm() {
         <div className="h-px flex-1 bg-gray-200" />
       </div>
       <form onSubmit={onSubmit} className="space-y-2">
+        {error && <p className="text-red-500 text-sm">{error}</p>}
         <FormInput label="User name or email address" name="email" />
         <div className="space-y-2">
           <FormInput label="Password" name="password" isPassword />
@@ -31,7 +49,7 @@ export default function SignInForm() {
               <input type="checkbox" className="checkbox checkbox-sm" />
               Remember me
             </label>
-            <Link href="/forgot-password" className=" hover:underline">
+            <Link href="/auth/reset-password" className="hover:underline">
               Forget your password
             </Link>
           </div>
@@ -45,8 +63,8 @@ export default function SignInForm() {
           {loading ? "Signing In..." : "Sign In"}
         </button>
 
-        <p className="text-sm  text-center">
-          Don’t have an account?{" "}
+        <p className="text-sm text-center">
+          Don&apos;t have an account?{" "}
           <Link href="/auth/signup" className="underline">
             Sign up
           </Link>

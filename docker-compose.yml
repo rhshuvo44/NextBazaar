@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  nextbazaar:
+    container_name: nextbazaar_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    restart: always
+    environment:
+      NODE_ENV: production
