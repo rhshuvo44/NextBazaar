@@ -41,7 +41,7 @@ export default function WishlistPage() {
               key={item.productId}
               className="relative group bg-base-100 border border-base-300 rounded-2xl overflow-hidden"
             >
-              <Link href={`/shop/${item.productId}`}>
+              <Link href={`/shop/${item.title.toLowerCase().replace(/\s+/g, "-")}`}>
                 <div className="aspect-square relative bg-base-200">
                   {item.image ? (
                     <Image
@@ -67,7 +67,7 @@ export default function WishlistPage() {
               </button>
 
               <div className="p-3">
-                <Link href={`/shop/${item.productId}`} className="font-semibold text-sm line-clamp-1 hover:text-primary">
+                <Link href={`/shop/${item.title.toLowerCase().replace(/\s+/g, "-")}`} className="font-semibold text-sm line-clamp-1 hover:text-primary">
                   {item.title}
                 </Link>
                 <p className="text-primary font-bold text-sm mt-1">${item.price}</p>
