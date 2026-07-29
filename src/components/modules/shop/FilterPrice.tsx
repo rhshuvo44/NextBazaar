@@ -21,7 +21,7 @@ const FilterPrice = ({ minPrice, maxPrice, onMinChange, onMaxChange }: FilterPri
   return (
     <div className="mb-6">
       <h3 className="font-semibold mb-3 text-lg">Price</h3>
-      <div className="relative h-2 bg-gray-200 rounded-full">
+      <div className="relative h-2 bg-base-300 rounded-full">
         <div
           className="absolute h-2 bg-primary rounded-full"
           style={{

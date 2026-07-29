@@ -23,7 +23,7 @@ const Tabs = ({
             onClick={() => onSortChange(tab)}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-all cursor-pointer ${
               activeSort === tab
-                ? "bg-white text-base-content shadow-sm"
+                ? "bg-base-100 text-base-content shadow-sm"
                 : "text-gray-500 hover:text-base-content"
             }`}
           >

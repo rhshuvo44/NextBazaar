@@ -47,7 +47,7 @@ export default function MenPage() {
   }, [filters, categoriesMen]);
 
   return (
-    <div className="bg-[#0f0f0f] min-h-screen">
+    <div className="bg-base-100 min-h-screen">
       <CategoryHero
         image={hoodies}
         title="Men's Collection"
@@ -56,7 +56,7 @@ export default function MenPage() {
         ctaText="Shop Men"
         gradient="from-black/80 via-black/60 to-black/80"
       />
-      <div className="container mx-auto grid grid-cols-12 gap-8 px-6 py-10">
+      <div className="w-full grid grid-cols-12 gap-8 px-6 py-10">
         <Sidebar
           minPrice={filters.priceRange[0]}
           maxPrice={filters.priceRange[1]}

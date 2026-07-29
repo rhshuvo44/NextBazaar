@@ -56,7 +56,7 @@ export default function JoggersPage() {
         ctaText="Shop Joggers"
         gradient="from-blue-900/60 via-black/40 to-transparent"
       />
-      <div className="container mx-auto grid grid-cols-12 gap-8 px-6 py-10">
+      <div className="w-full grid grid-cols-12 gap-8 px-6 py-10">
         <Sidebar
           minPrice={filters.priceRange[0]}
           maxPrice={filters.priceRange[1]}

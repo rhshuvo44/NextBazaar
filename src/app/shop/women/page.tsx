@@ -56,7 +56,7 @@ export default function WomenPage() {
         ctaText="Shop Women"
         gradient="from-black/50 via-black/30 to-transparent"
       />
-      <div className="container mx-auto grid grid-cols-12 gap-8 px-6 py-10">
+      <div className="w-full grid grid-cols-12 gap-8 px-6 py-10">
         <Sidebar
           minPrice={filters.priceRange[0]}
           maxPrice={filters.priceRange[1]}
