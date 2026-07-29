@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import {
   FaBars,
@@ -17,8 +17,17 @@ import ThemeToggle from "./ThemeToggle";
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
   const pathname = usePathname();
+  const router = useRouter();
   const user = getUser();
+
+  const handleSearch = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && searchQuery.trim()) {
+      router.push(`/shop?search=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery("");
+    }
+  };
 
   useEffect(() => {
     if (user) {
@@ -80,6 +89,9 @@ export default function Navbar() {
             <input
               type="text"
               placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleSearch}
               className="w-full pl-10 pr-3 py-2 rounded-md bg-base-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
             />
             <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -151,8 +163,12 @@ export default function Navbar() {
         </div>
       </div>
 
-      {mobileMenuOpen && (
-        <div className="md:hidden px-4 pb-4 space-y-4 bg-base-200 text-base-content">
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          mobileMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="px-4 pb-4 space-y-4 bg-base-200 text-base-content">
           <div className="flex flex-col space-y-2 text-base-content">
             {rl && (
               <Link
@@ -183,6 +199,9 @@ export default function Navbar() {
             <input
               type="text"
               placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleSearch}
               className="w-full pl-10 pr-3 py-2 rounded-md bg-base-100 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
             />
             <FaSearch className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400" />
@@ -231,7 +250,7 @@ export default function Navbar() {
             <ThemeToggle />
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 }

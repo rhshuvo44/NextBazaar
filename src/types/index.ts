@@ -144,3 +144,24 @@ export interface ShopFilters {
   sizes: string[];
   dressStyles: string[];
 }
+
+export interface AdminDashboardStats {
+  totalProducts: number;
+  totalOrders: number;
+  totalRevenue: number;
+  totalUsers: number;
+  totalVendors: number;
+  pendingVendors: number;
+  ordersByStatus: Record<string, number>;
+  recentOrders: {
+    id: string;
+    userId: string;
+    items: { productId: string; title: string; price: string; quantity: number }[];
+    total: string;
+    status: string;
+    createdAt: string;
+    user: { name?: string; email: string } | null;
+  }[];
+}
+
+export type OrderStatus = "PENDING" | "PROCESSING" | "SHIPPED" | "DELIVERED" | "CANCELLED";

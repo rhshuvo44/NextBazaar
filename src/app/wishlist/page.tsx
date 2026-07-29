@@ -1,21 +1,31 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { getWishlist, removeFromWishlist, WishlistItem } from "@/lib/wishlist";
 import { FaHeart, FaTrash, FaArrowLeft } from "react-icons/fa";
+import { useAppDispatch, useAppSelector } from "@/lib/store";
+import { fetchWishlist, removeWishlistItem } from "@/lib/slices/wishlistSlice";
 
 export default function WishlistPage() {
-  const [items, setItems] = useState<WishlistItem[]>([]);
+  const dispatch = useAppDispatch();
+  const { items, loading } = useAppSelector((s) => s.wishlist);
 
   useEffect(() => {
-    setItems(getWishlist());
-  }, []);
+    dispatch(fetchWishlist());
+  }, [dispatch]);
 
   const handleRemove = (productId: string) => {
-    setItems(removeFromWishlist(productId));
+    dispatch(removeWishlistItem(productId));
   };
+
+  if (loading && items.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center mt-16">
+        <span className="loading loading-spinner loading-lg" />
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (

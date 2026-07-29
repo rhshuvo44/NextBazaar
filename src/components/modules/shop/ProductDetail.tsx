@@ -5,7 +5,8 @@ import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { products } from "@/data/data";
 import { api, isAuthenticated } from "@/lib/api";
-import { isInWishlist, toggleWishlist } from "@/lib/wishlist";
+import { useAppDispatch, useAppSelector } from "@/lib/store";
+import { toggleWishlistItem } from "@/lib/slices/wishlistSlice";
 import Link from "next/link";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart, FaShoppingCart, FaCheck, FaStore } from "react-icons/fa";
@@ -14,14 +15,16 @@ import ProductCard from "@/components/ui/ProductCard";
 export default function ProductDetail() {
   const { slug } = useParams<{ slug: string }>();
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const wishlistItems = useAppSelector((s) => s.wishlist.items);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [addedToCart, setAddedToCart] = useState(false);
   const [addingToCart, setAddingToCart] = useState(false);
   const [shopName, setShopName] = useState<string | null>(null);
-  const [wishlistSaved, setWishlistSaved] = useState(false);
 
   const product = products.find((p) => p.title.toLowerCase().replace(/\s+/g, "-") === slug);
+  const wishlistSaved = product ? wishlistItems.some((i) => i.productId === String(product.id)) : false;
 
   useEffect(() => {
     if (!product?.vendorId) return;
@@ -29,10 +32,6 @@ export default function ProductDetail() {
       if (res.success && res.data) setShopName((res.data as Record<string, unknown>).shopName as string);
     }).catch(() => {});
   }, [product?.vendorId]);
-
-  useEffect(() => {
-    if (product) setWishlistSaved(isInWishlist(String(product.id)));
-  }, [product]);
 
   if (!product) {
     return (
@@ -74,7 +73,7 @@ export default function ProductDetail() {
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8 py-10 mt-16">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[1600px] mx-auto">
-        <div className="relative aspect-[4/5] md:aspect-square rounded-2xl overflow-hidden bg-base-200 md:sticky md:top-24">
+        <div className="relative aspect-[4/5] md:aspect-square rounded-2xl overflow-hidden bg-base-200 md:sticky md:top-24 animate-slide-left">
           <Image
             src={product.src}
             alt={product.title}
@@ -88,7 +87,7 @@ export default function ProductDetail() {
           )}
         </div>
 
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 animate-slide-right">
           {product.brand && (
             <p className="text-sm uppercase tracking-wider text-base-content/60">{product.brand}</p>
           )}
@@ -177,13 +176,12 @@ export default function ProductDetail() {
             <button
               onClick={() => {
                 const imageUrl = typeof product.src === "string" ? product.src : product.src.src;
-                toggleWishlist({
+                dispatch(toggleWishlistItem({
                   productId: String(product.id),
                   title: product.title,
                   price: product.price || "0",
                   image: imageUrl,
-                });
-                setWishlistSaved(!wishlistSaved);
+                }));
               }}
               className="btn btn-outline btn-square"
               aria-label={wishlistSaved ? "Remove from Wishlist" : "Add to Wishlist"}
@@ -199,7 +197,7 @@ export default function ProductDetail() {
       </div>
 
       {relatedProducts.length > 0 && (
-        <section className="mt-20 max-w-[1600px] mx-auto">
+        <section className="mt-20 max-w-[1600px] mx-auto animate-fade-in-up">
           <h2 className="text-2xl font-bold mb-6">More {product.category} Products</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
             {relatedProducts.map((p) => (

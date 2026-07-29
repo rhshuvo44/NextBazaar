@@ -141,13 +141,76 @@ export const api = {
     },
   },
   admin: {
+    dashboard: {
+      getStats: () => request<{
+        totalProducts: number;
+        totalOrders: number;
+        totalRevenue: number;
+        totalUsers: number;
+        totalVendors: number;
+        pendingVendors: number;
+        ordersByStatus: Record<string, number>;
+        recentOrders: {
+          id: string;
+          userId: string;
+          items: { productId: string; title: string; price: string; quantity: number }[];
+          total: string;
+          status: string;
+          createdAt: string;
+          user: { name?: string; email: string } | null;
+        }[];
+      }>("/admin/dashboard"),
+    },
     vendors: {
       list: (status?: string) =>
-        request<unknown[]>(`/admin/vendors${status ? `?status=${status}` : ""}`),
+        request<{ id: string; name: string; email: string; shopName: string; shopDescription: string; vendorStatus: string; createdAt: string }[]>(`/admin/vendors${status ? `?status=${status}` : ""}`),
       approve: (id: string) =>
-        request<unknown>(`/admin/vendors/${id}/approve`, { method: "PUT" }),
+        request<{ message: string; vendor: { id: string; vendorStatus: string } }>(`/admin/vendors/${id}/approve`, { method: "PUT" }),
       suspend: (id: string) =>
-        request<unknown>(`/admin/vendors/${id}/suspend`, { method: "PUT" }),
+        request<{ message: string; vendor: { id: string; vendorStatus: string } }>(`/admin/vendors/${id}/suspend`, { method: "PUT" }),
     },
+    products: {
+      list: (params?: { search?: string; category?: string; page?: number; limit?: number }) => {
+        const query = new URLSearchParams();
+        if (params?.search) query.set("search", params.search);
+        if (params?.category) query.set("category", params.category);
+        if (params?.page) query.set("page", String(params.page));
+        if (params?.limit) query.set("limit", String(params.limit));
+        const qs = query.toString();
+        return request<{ products: Record<string, unknown>[]; total: number; page: number; totalPages: number }>(`/admin/products${qs ? `?${qs}` : ""}`);
+      },
+      delete: (id: string) =>
+        request<{ message: string }>(`/admin/products/${id}`, { method: "DELETE" }),
+    },
+    orders: {
+      list: (params?: { status?: string; page?: number; limit?: number }) => {
+        const query = new URLSearchParams();
+        if (params?.status) query.set("status", params.status);
+        if (params?.page) query.set("page", String(params.page));
+        if (params?.limit) query.set("limit", String(params.limit));
+        const qs = query.toString();
+        return request<{ orders: Record<string, unknown>[]; total: number; page: number; totalPages: number }>(`/admin/orders${qs ? `?${qs}` : ""}`);
+      },
+      updateStatus: (id: string, status: string) =>
+        request<{ message: string; order: Record<string, unknown> }>(`/admin/orders/${id}/status`, { method: "PUT", body: JSON.stringify({ status }) }),
+    },
+    users: {
+      list: (params?: { role?: string; page?: number; limit?: number }) => {
+        const query = new URLSearchParams();
+        if (params?.role) query.set("role", params.role);
+        if (params?.page) query.set("page", String(params.page));
+        if (params?.limit) query.set("limit", String(params.limit));
+        const qs = query.toString();
+        return request<{ users: Record<string, unknown>[]; total: number; page: number; totalPages: number }>(`/admin/users${qs ? `?${qs}` : ""}`);
+      },
+    },
+  },
+  wishlist: {
+    get: () => request<{ items: unknown[] }>("/wishlist"),
+    toggle: (body: { productId: string; title: string; price: string; image?: string }) =>
+      request<{ items: unknown[] }>("/wishlist/items", { method: "POST", body: JSON.stringify(body) }),
+    remove: (productId: string) =>
+      request<{ items: unknown[] }>(`/wishlist/items/${productId}`, { method: "DELETE" }),
+    clear: () => request<{ message: string }>("/wishlist", { method: "DELETE" }),
   },
 };
