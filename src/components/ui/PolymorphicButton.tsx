@@ -1,3 +1,5 @@
+"use client";
+
 import { PolymorphicButtonProps } from "@/types";
 import Link from "next/link";
 import { forwardRef } from "react";

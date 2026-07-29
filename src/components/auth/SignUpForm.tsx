@@ -1,18 +1,35 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { FormInput } from "../form/FormInput";
 import { SocialButtons } from "../ui/SocialButtons";
+import { api, setToken, setUser } from "@/lib/api";
 
 export default function SignUpForm() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
+    setError("");
     setLoading(true);
-    // TODO: call your API
-    setTimeout(() => setLoading(false), 800);
+
+    const form = e.currentTarget as HTMLFormElement;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const password = (form.elements.namedItem("password") as HTMLInputElement).value;
+
+    const res = await api.auth.signup({ email, password });
+    if (res.success && res.data) {
+      setToken(res.data.token);
+      setUser(res.data.user);
+      router.push("/");
+    } else {
+      setError(res.error || "Something went wrong");
+    }
+    setLoading(false);
   }
 
   return (
@@ -24,6 +41,7 @@ export default function SignUpForm() {
         <div className="h-px flex-1 bg-gray-200" />
       </div>
       <form onSubmit={onSubmit} className="space-y-2">
+        {error && <p className="text-red-500 text-sm">{error}</p>}
         <FormInput label="Email address" name="email" type="email" />
         <FormInput label="Password" name="password" isPassword />
 
@@ -48,7 +66,7 @@ export default function SignUpForm() {
           {loading ? "Creating account..." : "Create Account"}
         </button>
 
-        <p className="text-sm  text-center">
+        <p className="text-sm text-center">
           Already have an account?{" "}
           <Link href="/auth/signin" className="underline">
             Sign in

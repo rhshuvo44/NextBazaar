@@ -1,15 +1,26 @@
-const FilterSizes = () => {
-  const sizes = ["XS", "S", "M", "L", "XL", "2XL"];
+"use client";
+
+interface FilterSizesProps {
+  selectedSizes: string[];
+  onToggleSize: (size: string) => void;
+}
+
+const sizes = ["XS", "S", "M", "L", "XL", "2XL"];
+
+const FilterSizes = ({ selectedSizes, onToggleSize }: FilterSizesProps) => {
   return (
     <div className="mb-6">
-      <h3 className="font-semibold mb-4 text-2xl border-b-2 border-accent">Sizes</h3>
-      <div className="space-y-2 grid grid-cols- md:grid-cols-3  gap-2">
+      <h3 className="font-semibold mb-3 text-lg">Sizes</h3>
+      <div className="grid grid-cols-3 gap-2">
         {sizes.map((s) => (
           <button
             key={s}
-            className="btn rounded-md btn-sm w-full justify-center"
+            onClick={() => onToggleSize(s)}
+            className={`btn btn-sm rounded-lg ${
+              selectedSizes.includes(s) ? "btn-primary" : "btn-outline"
+            }`}
           >
-            <span className="label-text">{s}</span>
+            {s}
           </button>
         ))}
       </div>

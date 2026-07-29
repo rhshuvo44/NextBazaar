@@ -9,13 +9,16 @@ import {
   FaSearch,
   FaShoppingCart,
   FaUser,
+  FaStore,
 } from "react-icons/fa";
+import { getUser } from "@/lib/api";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const pathname = usePathname();
+  const user = getUser();
+
   const navLinks = [
     { path: "/", label: "Home" },
     { path: "/shop", label: "Shop" },
@@ -24,19 +27,30 @@ export default function Navbar() {
     { path: "/shop/combos", label: "Combos" },
     { path: "/shop/joggers", label: "Joggers" },
   ];
-  // Function to check if link is active
+
   const isActive = (href: string) => pathname === href;
+
+  const roleLinks = () => {
+    if (!user) return null;
+    if (user.role === "VENDOR") {
+      return { href: "/vendor/dashboard", label: "Dashboard", icon: FaStore };
+    }
+    if (user.role === "ADMIN") {
+      return { href: "/admin/vendors", label: "Vendors", icon: FaStore };
+    }
+    return null;
+  };
+
+  const rl = roleLinks();
 
   return (
     <nav className="bg-base-200 shadow-md fixed top-0 left-0 w-full z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link href="#" className="text-2xl font-bold text-base-content">
+          <Link href="/" className="text-2xl font-bold text-base-content">
             NextBazaar
           </Link>
 
-          {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6 ml-10 text-base-content">
             {navLinks.map((nav, i) => (
               <Link
@@ -48,15 +62,11 @@ export default function Navbar() {
                     : "text-base-content"
                 }`}
               >
-                {nav.path === "/"
-                  ? "Home"
-                  : nav.label.replace("/", "").charAt(0).toUpperCase() +
-                    nav.label.slice(1)}
+                {nav.label}
               </Link>
             ))}
           </div>
 
-          {/* Desktop Search */}
           <div className="hidden md:flex items-center w-1/3 relative">
             <input
               type="text"
@@ -66,9 +76,19 @@ export default function Navbar() {
             <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           </div>
 
-          {/* Desktop Icons */}
           <div className="hidden md:flex items-center space-x-2 text-base-content">
-            {/* Wishlist Icon */}
+            {rl && (
+              <Link href={rl.href}>
+                <div
+                  className={`p-2 rounded-full ${
+                    isActive(rl.href) ? "text-violet-500" : "text-base-content"
+                  } hover:bg-gray-200 hover:text-violet-500`}
+                >
+                  <rl.icon className="cursor-pointer text-xl" />
+                </div>
+              </Link>
+            )}
+
             <Link href="/wishlist">
               <div
                 className={`p-2 rounded-full ${
@@ -79,7 +99,6 @@ export default function Navbar() {
               </div>
             </Link>
 
-            {/* Shopping Cart Icon with count */}
             <div className="relative cursor-pointer">
               <Link href="/cart">
                 <div
@@ -95,22 +114,21 @@ export default function Navbar() {
               </span>
             </div>
 
-            {/* User Account Icon */}
-            <Link href="/account">
+            <Link href={user ? "/account" : "/auth/signin"}>
               <div
                 className={`p-2 rounded-full ${
-                  isActive("/account") ? "text-green-500" : "text-base-content"
+                  isActive("/account") || isActive("/auth/signin")
+                    ? "text-green-500"
+                    : "text-base-content"
                 } hover:bg-gray-200 hover:text-green-500`}
               >
                 <FaUser className="cursor-pointer text-xl " />
               </div>
             </Link>
 
-            {/* Theme Toggle (assuming it's a separate component) */}
             <ThemeToggle />
           </div>
 
-          {/* Mobile Menu Toggle */}
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -122,10 +140,18 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden px-4 pb-4 space-y-4 bg-base-200 text-base-content">
           <div className="flex flex-col space-y-2 text-base-content">
+            {rl && (
+              <Link
+                href={rl.href}
+                className="block px-2 py-1 rounded"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {rl.label}
+              </Link>
+            )}
             {navLinks.map((nav, i) => (
               <Link
                 key={i}
@@ -135,11 +161,9 @@ export default function Navbar() {
                     ? "bg-primary text-white"
                     : "text-darkText dark:text-lightText hover:bg-gray-200 dark:hover:bg-gray-700"
                 }`}
+                onClick={() => setMobileMenuOpen(false)}
               >
-                {nav.path === "/"
-                  ? "Home"
-                  : nav.label.replace("/", "").charAt(0).toUpperCase() +
-                    nav.label.slice(1)}
+                {nav.label}
               </Link>
             ))}
           </div>
@@ -154,8 +178,7 @@ export default function Navbar() {
           </div>
 
           <div className="flex justify-around text-xl mt-4">
-            {/* Wishlist Icon */}
-            <Link href="/wishlist">
+            <Link href="/wishlist" onClick={() => setMobileMenuOpen(false)}>
               <div
                 className={`p-2 rounded-full ${
                   isActive("/wishlist") ? "text-red-500" : "text-base-content"
@@ -165,9 +188,8 @@ export default function Navbar() {
               </div>
             </Link>
 
-            {/* Shopping Cart Icon with count */}
             <div className="relative cursor-pointer">
-              <Link href="/cart">
+              <Link href="/cart" onClick={() => setMobileMenuOpen(false)}>
                 <div
                   className={`p-2 rounded-full ${
                     isActive("/cart") ? "text-blue-500" : "text-base-content"
@@ -181,18 +203,18 @@ export default function Navbar() {
               </span>
             </div>
 
-            {/* User Account Icon */}
-            <Link href="/account">
+            <Link href={user ? "/account" : "/auth/signin"} onClick={() => setMobileMenuOpen(false)}>
               <div
                 className={`p-2 rounded-full ${
-                  isActive("/account") ? "text-green-500" : "text-base-content"
+                  isActive("/account") || isActive("/auth/signin")
+                    ? "text-green-500"
+                    : "text-base-content"
                 } hover:bg-gray-200`}
               >
                 <FaUser className="cursor-pointer text-xl hover:text-green-500" />
               </div>
             </Link>
 
-            {/* Theme Toggle (assuming it's a separate component) */}
             <ThemeToggle />
           </div>
         </div>

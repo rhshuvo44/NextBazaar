@@ -78,6 +78,8 @@ export type ProductCardProps = {
     brand?: string;
     showArrow?: boolean;
     wishlist?: boolean;
+    discount?: number;
+    shopName?: string;
 }
 export type Feedbacks = {
     src: string | StaticImageData;
@@ -92,4 +94,20 @@ export interface Product {
     brand?: string;
     price?: string;
     category: "Men" | "Women" | "Unisex" | "Featured" | "Combos" | "Joggers";
+    sizes?: string[];
+    colors?: string[];
+    description?: string;
+    discount?: number;
+    vendorId?: string;
+    shopName?: string;
+}
+
+export type SortOption = "New" | "Recommended";
+
+export interface ShopFilters {
+  categories: string[];
+  priceRange: [number, number];
+  colors: string[];
+  sizes: string[];
+  dressStyles: string[];
 }

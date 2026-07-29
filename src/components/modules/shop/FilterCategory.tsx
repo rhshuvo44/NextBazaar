@@ -2,27 +2,16 @@ import Link from "next/link";
 
 const FilterCategory = () => {
   const categories = [
-    {
-      name: "Tops",
-      subcategories: ["Casual Tops", "Formal Tops", "Crop Tops"],
-    },
-    {
-      name: "Printed T-shirts",
-      subcategories: ["Graphic Tees", "Slogan Tees", "Oversized Tees"],
-    },
-    {
-      name: "Kurtis",
-      subcategories: ["Anarkali", "Straight Kurti", "A-line Kurti"],
-    },
-    {
-      name: "Boxers",
-      subcategories: ["Cotton Boxers", "Printed Boxers", "Plain Boxers"],
-    },
+    { name: "Tops", subcategories: ["Casual Tops", "Formal Tops", "Crop Tops"] },
+    { name: "Printed T-shirts", subcategories: ["Graphic Tees", "Slogan Tees", "Oversized Tees"] },
+    { name: "Kurtis", subcategories: ["Anarkali", "Straight Kurti", "A-line Kurti"] },
+    { name: "Boxers", subcategories: ["Cotton Boxers", "Printed Boxers", "Plain Boxers"] },
   ];
 
   return (
     <div className="mb-6">
-      <ul className="menu rounded-box w-56">
+      <h3 className="font-semibold mb-3 text-lg">Categories</h3>
+      <ul className="menu rounded-box">
         {categories.map((c, i) => (
           <li key={i}>
             <details>

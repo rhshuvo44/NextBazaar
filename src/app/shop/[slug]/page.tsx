@@ -1,9 +1,10 @@
-export default function Home() {
-  return (
-    <>
-      <main className="">
-        <h1>Products details</h1>
-      </main>
-    </>
-  );
+import ProductDetail from "@/components/modules/shop/ProductDetail";
+
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  return <ProductDetail slug={slug} />;
 }

@@ -1,10 +1,35 @@
-const Tabs = ({ category }: { category: string }) => {
+"use client";
+
+import { SortOption } from "@/types";
+
+const Tabs = ({
+  category,
+  activeSort,
+  onSortChange,
+}: {
+  category: string;
+  activeSort: SortOption;
+  onSortChange: (sort: SortOption) => void;
+}) => {
+  const tabs: SortOption[] = ["New", "Recommended"];
+
   return (
-    <div className="flex justify-between items-center mb-6">
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
       <h2 className="text-2xl font-bold">{category} Clothing</h2>
-      <div className="tabs tabs-boxed space-x-2">
-        <a className="tab tab-active">New</a>
-        <a className="tab">Recommended</a>
+      <div className="flex gap-1 bg-base-200 rounded-lg p-1">
+        {tabs.map((tab) => (
+          <button
+            key={tab}
+            onClick={() => onSortChange(tab)}
+            className={`px-4 py-2 text-sm font-medium rounded-md transition-all cursor-pointer ${
+              activeSort === tab
+                ? "bg-white text-base-content shadow-sm"
+                : "text-gray-500 hover:text-base-content"
+            }`}
+          >
+            {tab}
+          </button>
+        ))}
       </div>
     </div>
   );

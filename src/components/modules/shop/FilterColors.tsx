@@ -1,25 +1,37 @@
 "use client";
-import { useState } from "react";
 
-const colors = ["#6a0dad", "#000000", "#ff0000", "#ffa500", "#000080"];
+interface FilterColorsProps {
+  selectedColors: string[];
+  onToggleColor: (color: string) => void;
+}
 
-const FilterColors = () => {
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+const colors = [
+  { hex: "#6a0dad", label: "Purple" },
+  { hex: "#000000", label: "Black" },
+  { hex: "#ff0000", label: "Red" },
+  { hex: "#ffa500", label: "Orange" },
+  { hex: "#000080", label: "Navy" },
+  { hex: "#ffffff", label: "White" },
+  { hex: "#3C4242", label: "Gray" },
+];
 
+const FilterColors = ({ selectedColors, onToggleColor }: FilterColorsProps) => {
   return (
     <div className="mb-6">
-      <h3 className="font-semibold mb-4 text-2xl border-b-2 border-accent">
-        Colors
-      </h3>
-      <div className="flex space-x-2">
-        {colors.map((color) => (
+      <h3 className="font-semibold mb-3 text-lg">Colors</h3>
+      <div className="flex flex-wrap gap-2">
+        {colors.map(({ hex, label }) => (
           <button
-            key={color}
-            onClick={() => setSelectedColor(color)}
-            style={{ backgroundColor: color }}
-            className={`w-8 h-8 rounded-full border-2 ${
-              selectedColor === color ? "border-black" : "border-transparent"
+            key={hex}
+            onClick={() => onToggleColor(hex)}
+            className={`w-7 h-7 rounded-full border-2 transition-all ${
+              selectedColors.includes(hex)
+                ? "border-primary scale-110 ring-2 ring-primary/30"
+                : "border-gray-300 hover:border-gray-500"
             }`}
+            style={{ backgroundColor: hex }}
+            aria-label={label}
+            title={label}
           />
         ))}
       </div>
