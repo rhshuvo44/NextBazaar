@@ -10,10 +10,10 @@ const PriceTable = ({
   tableTitle: string;
 }) => {
   return (
-    <div className=" py-10">
+    <div className="w-full px-6 py-10">
       <SectionTitle title={title} />
-      <div className="overflow-x-auto ">
-        <table className="table table-zebra">
+      <div className="overflow-x-auto w-full">
+        <table className="table table-zebra w-full">
           {/* head */}
           <thead>
             <tr className=" text-base-content">
