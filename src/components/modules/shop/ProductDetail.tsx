@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import { products } from "@/data/data";
 import { api } from "@/lib/api";
 import Link from "next/link";
@@ -9,7 +10,8 @@ import { CiHeart } from "react-icons/ci";
 import { FaShoppingCart, FaCheck, FaStore } from "react-icons/fa";
 import ProductCard from "@/components/ui/ProductCard";
 
-export default function ProductDetail({ slug }: { slug: string }) {
+export default function ProductDetail() {
+  const { slug } = useParams<{ slug: string }>();
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [addedToCart, setAddedToCart] = useState(false);
@@ -26,9 +28,9 @@ export default function ProductDetail({ slug }: { slug: string }) {
 
   if (!product) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[50vh] gap-4">
+      <div className="flex flex-col items-center justify-center min-h-[50vh] gap-4 mt-16">
         <h2 className="text-2xl font-bold">Product not found</h2>
-        <p className="text-gray-500">The product you&apos;re looking for doesn&apos;t exist.</p>
+        <p className="text-base-content/60">The product you&apos;re looking for doesn&apos;t exist.</p>
         <Link href="/shop" className="btn btn-primary">Back to Shop</Link>
       </div>
     );
@@ -44,9 +46,9 @@ export default function ProductDetail({ slug }: { slug: string }) {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div className="relative aspect-square rounded-2xl overflow-hidden bg-base-200">
+    <div className="w-full px-4 sm:px-6 lg:px-8 py-10 mt-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[1600px] mx-auto">
+        <div className="relative aspect-[4/5] md:aspect-square rounded-2xl overflow-hidden bg-base-200 md:sticky md:top-24">
           <Image
             src={product.src}
             alt={product.title}
@@ -62,12 +64,12 @@ export default function ProductDetail({ slug }: { slug: string }) {
 
         <div className="flex flex-col gap-6">
           {product.brand && (
-            <p className="text-sm uppercase tracking-wider text-gray-500">{product.brand}</p>
+            <p className="text-sm uppercase tracking-wider text-base-content/60">{product.brand}</p>
           )}
           <h1 className="text-3xl sm:text-4xl font-bold">{product.title}</h1>
 
           {shopName && (
-            <Link href={`/shop?vendor=${product.vendorId}`} className="flex items-center gap-2 text-sm text-violet-600 hover:underline">
+            <Link href={`/shop?vendor=${product.vendorId}`} className="flex items-center gap-2 text-sm text-primary hover:underline">
               <FaStore /> Sold by {shopName}
             </Link>
           )}
@@ -78,8 +80,8 @@ export default function ProductDetail({ slug }: { slug: string }) {
                 <span className="text-3xl font-bold text-primary">
                   ${(parseFloat(product.price || "0") * (1 - product.discount / 100)).toFixed(2)}
                 </span>
-                <span className="text-xl text-gray-400 line-through">${product.price}</span>
-                <span className="text-sm font-semibold text-red-500 bg-red-50 px-2 py-1 rounded">
+                <span className="text-xl text-base-content/40 line-through">${product.price}</span>
+                <span className="text-sm font-semibold text-red-500 bg-red-500/10 px-2 py-1 rounded">
                   Save {product.discount}%
                 </span>
               </>
@@ -89,7 +91,7 @@ export default function ProductDetail({ slug }: { slug: string }) {
           </div>
 
           {product.description && (
-            <p className="text-gray-600 leading-relaxed">{product.description}</p>
+            <p className="text-base-content/70 leading-relaxed">{product.description}</p>
           )}
 
           {product.sizes && product.sizes.length > 0 && (
@@ -103,7 +105,7 @@ export default function ProductDetail({ slug }: { slug: string }) {
                     className={`px-4 py-2 rounded-lg border text-sm font-medium transition-all ${
                       selectedSize === s
                         ? "border-primary bg-primary text-white"
-                        : "border-gray-300 hover:border-gray-500"
+                        : "border-base-300 hover:border-base-content/40"
                     }`}
                   >
                     {s}
@@ -122,7 +124,7 @@ export default function ProductDetail({ slug }: { slug: string }) {
                     key={c}
                     onClick={() => setSelectedColor(c)}
                     className={`w-8 h-8 rounded-full border-2 transition-all ${
-                      selectedColor === c ? "border-primary scale-110" : "border-gray-300"
+                      selectedColor === c ? "border-primary scale-110" : "border-base-300"
                     }`}
                     style={{ backgroundColor: c }}
                     aria-label={`Color ${c}`}
@@ -151,7 +153,7 @@ export default function ProductDetail({ slug }: { slug: string }) {
       </div>
 
       {relatedProducts.length > 0 && (
-        <section className="mt-20">
+        <section className="mt-20 max-w-[1600px] mx-auto">
           <h2 className="text-2xl font-bold mb-6">More {product.category} Products</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
             {relatedProducts.map((p) => (

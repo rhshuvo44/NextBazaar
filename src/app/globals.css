@@ -52,6 +52,36 @@
   --text-small: 12px;
   --text-tiny: 10px; */
 }
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: false;
+
+  --color-primary: "#8A33FD";
+  --color-primary-content: "#FFFFFF";
+  --color-secondary: "#3C4242";
+  --color-secondary-content: "#FFFFFF";
+  --color-accent: "#BEBCBD";
+  --color-accent-content: "#1A1A2E";
+  --color-neutral: "#807D7E";
+  --color-neutral-content: "#FFFFFF";
+  --color-base-100: "#1A1A2E";
+  --color-base-200: "#16213E";
+  --color-base-300: "#0F3460";
+  --color-base-content: "#E8E8E8";
+  --color-info: "#3B82F6";
+  --color-success: "#22C55E";
+  --color-warning: "#F59E0B";
+  --color-error: "#EF4444";
+  --radius-selector: 1rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
 /* Root variables for light theme */
 
 /* Apply to body */
