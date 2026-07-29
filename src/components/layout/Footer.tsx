@@ -65,6 +65,11 @@ export default function Footer() {
               </Link>
             </li>
             <li>
+              <Link href="/vendor/signup" className="hover:text-white">
+                Sell on NextBazaar
+              </Link>
+            </li>
+            <li>
               <Link href="#" className="hover:text-white">
                 Media
               </Link>

@@ -1,3 +1,5 @@
+"use client";
+
 import { ProductCardProps } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,6 +15,7 @@ const ProductCard = ({
   showArrow,
   wishlist,
   discount,
+  shopName,
 }: ProductCardProps) => {
   const slug = title.toLowerCase().replace(/\s+/g, "-");
   const linkHref = href || `/shop/${slug}`;
@@ -80,6 +83,7 @@ const ProductCard = ({
                 )}
               </div>
               {brand && <p className="text-sm text-gray-500 mt-1">{brand}</p>}
+              {shopName && <p className="text-xs text-gray-400 mt-0.5">Sold by {shopName}</p>}
             </>
           )}
         </div>

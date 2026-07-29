@@ -79,6 +79,7 @@ export type ProductCardProps = {
     showArrow?: boolean;
     wishlist?: boolean;
     discount?: number;
+    shopName?: string;
 }
 export type Feedbacks = {
     src: string | StaticImageData;
@@ -97,6 +98,8 @@ export interface Product {
     colors?: string[];
     description?: string;
     discount?: number;
+    vendorId?: string;
+    shopName?: string;
 }
 
 export type SortOption = "New" | "Recommended";

@@ -1,3 +1,5 @@
+"use client";
+
 import FilterCategory from "./FilterCategory";
 import FilterPrice from "./FilterPrice";
 import FilterColors from "./FilterColors";

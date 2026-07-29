@@ -17,6 +17,20 @@ export function isAuthenticated(): boolean {
   return !!getToken();
 }
 
+export function getUser(): { id: string; name?: string; email: string; role: string; shopName?: string; vendorStatus?: string } | null {
+  if (typeof window === "undefined") return null;
+  const raw = localStorage.getItem("user");
+  return raw ? JSON.parse(raw) : null;
+}
+
+export function setUser(user: unknown) {
+  localStorage.setItem("user", JSON.stringify(user));
+}
+
+export function clearUser() {
+  localStorage.removeItem("user");
+}
+
 async function request<T>(
   endpoint: string,
   options: RequestInit = {}
@@ -43,12 +57,17 @@ async function request<T>(
 export const api = {
   auth: {
     signup: (body: { email: string; password: string; name?: string }) =>
-      request<{ token: string; user: { id: string; name?: string; email: string; role: string } }>(
+      request<{ token: string; user: { id: string; name?: string; email: string; role: string; shopName?: string; vendorStatus?: string } }>(
         "/auth/signup",
         { method: "POST", body: JSON.stringify(body) }
       ),
+    vendorSignup: (body: { email: string; password: string; shopName: string; name?: string; shopDescription?: string }) =>
+      request<{ token: string; user: Record<string, unknown>; message: string }>(
+        "/auth/vendor-signup",
+        { method: "POST", body: JSON.stringify(body) }
+      ),
     signin: (body: { email: string; password: string }) =>
-      request<{ token: string; user: { id: string; name?: string; email: string; role: string } }>(
+      request<{ token: string; user: { id: string; name?: string; email: string; role: string; shopName?: string; vendorStatus?: string } }>(
         "/auth/signin",
         { method: "POST", body: JSON.stringify(body) }
       ),
@@ -67,15 +86,16 @@ export const api = {
         method: "POST",
         body: JSON.stringify(body),
       }),
-    me: () => request<{ id: string; name?: string; email: string; role: string }>("/auth/me"),
+    me: () => request<{ id: string; name?: string; email: string; role: string; shopName?: string; vendorStatus?: string }>("/auth/me"),
   },
   products: {
-    list: (params?: { category?: string; minPrice?: number; maxPrice?: number; search?: string }) => {
+    list: (params?: { category?: string; minPrice?: number; maxPrice?: number; search?: string; vendorId?: string }) => {
       const query = new URLSearchParams();
       if (params?.category) query.set("category", params.category);
       if (params?.minPrice !== undefined) query.set("minPrice", String(params.minPrice));
       if (params?.maxPrice !== undefined) query.set("maxPrice", String(params.maxPrice));
       if (params?.search) query.set("search", params.search);
+      if (params?.vendorId) query.set("vendorId", params.vendorId);
       const qs = query.toString();
       return request<unknown[]>(`/products${qs ? `?${qs}` : ""}`);
     },
@@ -86,5 +106,38 @@ export const api = {
       request<unknown>("/orders", { method: "POST", body: JSON.stringify(body) }),
     list: () => request<unknown[]>("/orders"),
     getById: (id: string) => request<unknown>(`/orders/${id}`),
+  },
+  vendor: {
+    dashboard: () => request<{ productCount: number; orderCount: number; revenue: number }>("/vendor/dashboard"),
+    profile: () => request<Record<string, unknown>>("/vendor/profile"),
+    updateProfile: (body: { shopName?: string; shopDescription?: string; shopLogo?: string }) =>
+      request<Record<string, unknown>>("/vendor/profile", { method: "PUT", body: JSON.stringify(body) }),
+    products: {
+      list: () => request<unknown[]>("/vendor/products"),
+      create: (body: { title: string; price: string; category: string; brand?: string; sizes?: string[]; colors?: string[]; description?: string; discount?: number }) =>
+        request<unknown>("/vendor/products", { method: "POST", body: JSON.stringify(body) }),
+      update: (id: string, body: Record<string, unknown>) =>
+        request<unknown>(`/vendor/products/${id}`, { method: "PUT", body: JSON.stringify(body) }),
+      delete: (id: string) =>
+        request<unknown>(`/vendor/products/${id}`, { method: "DELETE" }),
+    },
+    orders: {
+      list: () => request<unknown[]>("/vendor/orders"),
+      updateItemStatus: (orderId: string, itemIdx: number, status: string) =>
+        request<unknown>(`/vendor/orders/${orderId}/items/${itemIdx}/status`, {
+          method: "PUT",
+          body: JSON.stringify({ status }),
+        }),
+    },
+  },
+  admin: {
+    vendors: {
+      list: (status?: string) =>
+        request<unknown[]>(`/admin/vendors${status ? `?status=${status}` : ""}`),
+      approve: (id: string) =>
+        request<unknown>(`/admin/vendors/${id}/approve`, { method: "PUT" }),
+      suspend: (id: string) =>
+        request<unknown>(`/admin/vendors/${id}/suspend`, { method: "PUT" }),
+    },
   },
 };

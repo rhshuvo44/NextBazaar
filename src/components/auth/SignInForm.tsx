@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { FormInput } from "../form/FormInput";
 import { SocialButtons } from "../ui/SocialButtons";
-import { api, setToken } from "@/lib/api";
+import { api, setToken, setUser } from "@/lib/api";
 
 export default function SignInForm() {
   const router = useRouter();
@@ -24,6 +24,7 @@ export default function SignInForm() {
     const res = await api.auth.signin({ email, password });
     if (res.success && res.data) {
       setToken(res.data.token);
+      setUser(res.data.user);
       router.push("/");
     } else {
       setError(res.error || "Invalid email or password");

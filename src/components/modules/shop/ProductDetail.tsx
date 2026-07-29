@@ -1,19 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { products } from "@/data/data";
+import { api } from "@/lib/api";
 import Link from "next/link";
 import { CiHeart } from "react-icons/ci";
-import { FaShoppingCart, FaCheck } from "react-icons/fa";
+import { FaShoppingCart, FaCheck, FaStore } from "react-icons/fa";
 import ProductCard from "@/components/ui/ProductCard";
 
 export default function ProductDetail({ slug }: { slug: string }) {
-  const product = products.find((p) => p.title.toLowerCase().replace(/\s+/g, "-") === slug);
-
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [addedToCart, setAddedToCart] = useState(false);
+  const [shopName, setShopName] = useState<string | null>(null);
+
+  const product = products.find((p) => p.title.toLowerCase().replace(/\s+/g, "-") === slug);
+
+  useEffect(() => {
+    if (!product?.vendorId) return;
+    api.products.getById(product.vendorId).then((res) => {
+      if (res.success && res.data) setShopName((res.data as Record<string, unknown>).shopName as string);
+    }).catch(() => {});
+  }, [product?.vendorId]);
 
   if (!product) {
     return (
@@ -56,6 +65,12 @@ export default function ProductDetail({ slug }: { slug: string }) {
             <p className="text-sm uppercase tracking-wider text-gray-500">{product.brand}</p>
           )}
           <h1 className="text-3xl sm:text-4xl font-bold">{product.title}</h1>
+
+          {shopName && (
+            <Link href={`/shop?vendor=${product.vendorId}`} className="flex items-center gap-2 text-sm text-violet-600 hover:underline">
+              <FaStore /> Sold by {shopName}
+            </Link>
+          )}
 
           <div className="flex items-center gap-4">
             {product.discount ? (

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { FormInput } from "../form/FormInput";
 import { SocialButtons } from "../ui/SocialButtons";
-import { api, setToken } from "@/lib/api";
+import { api, setToken, setUser } from "@/lib/api";
 
 export default function SignUpForm() {
   const router = useRouter();
@@ -24,6 +24,7 @@ export default function SignUpForm() {
     const res = await api.auth.signup({ email, password });
     if (res.success && res.data) {
       setToken(res.data.token);
+      setUser(res.data.user);
       router.push("/");
     } else {
       setError(res.error || "Something went wrong");

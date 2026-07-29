@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { StaticImageData } from "next/image";
 import PolymorphicButton from "@/components/ui/PolymorphicButton";
