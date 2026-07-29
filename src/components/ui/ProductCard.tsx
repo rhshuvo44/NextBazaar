@@ -1,12 +1,15 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { ProductCardProps } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { CiHeart } from "react-icons/ci";
-import { FaLongArrowAltRight } from "react-icons/fa";
+import { FaHeart, FaLongArrowAltRight } from "react-icons/fa";
+import { isInWishlist, toggleWishlist } from "@/lib/wishlist";
 
 const ProductCard = ({
+  id,
   src,
   title,
   href,
@@ -17,22 +20,42 @@ const ProductCard = ({
   discount,
   shopName,
 }: ProductCardProps) => {
+  const [saved, setSaved] = useState(false);
   const slug = title.toLowerCase().replace(/\s+/g, "-");
   const linkHref = href || `/shop/${slug}`;
+
+  useEffect(() => {
+    if (wishlist && id) setSaved(isInWishlist(String(id)));
+  }, [wishlist, id]);
+
+  const handleToggleWishlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!id) return;
+    const imageUrl = typeof src === "string" ? src : src.src;
+    toggleWishlist({
+      productId: String(id),
+      title,
+      price: price || "0",
+      image: imageUrl,
+    });
+    setSaved(!saved);
+  };
 
   return (
     <Link href={linkHref} className="block">
       <div className="bg-base-100 shadow-sm relative rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 cursor-pointer group">
         {wishlist && (
           <button
-            aria-label="Add to Wishlist"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-            }}
+            aria-label={saved ? "Remove from Wishlist" : "Add to Wishlist"}
+            onClick={handleToggleWishlist}
             className="bg-white absolute top-3 right-3 rounded-full p-2 shadow transition-colors duration-300 hover:bg-red-100 z-10 cursor-pointer"
           >
-            <CiHeart className="text-lg text-black transition-colors duration-300 hover:text-red-500" />
+            {saved ? (
+              <FaHeart className="text-lg text-red-500" />
+            ) : (
+              <CiHeart className="text-lg text-black transition-colors duration-300 hover:text-red-500" />
+            )}
           </button>
         )}
 

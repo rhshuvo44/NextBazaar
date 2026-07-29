@@ -2,20 +2,24 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { products } from "@/data/data";
-import { api } from "@/lib/api";
+import { api, isAuthenticated } from "@/lib/api";
+import { isInWishlist, toggleWishlist } from "@/lib/wishlist";
 import Link from "next/link";
 import { CiHeart } from "react-icons/ci";
-import { FaShoppingCart, FaCheck, FaStore } from "react-icons/fa";
+import { FaHeart, FaShoppingCart, FaCheck, FaStore } from "react-icons/fa";
 import ProductCard from "@/components/ui/ProductCard";
 
 export default function ProductDetail() {
   const { slug } = useParams<{ slug: string }>();
+  const router = useRouter();
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [addedToCart, setAddedToCart] = useState(false);
+  const [addingToCart, setAddingToCart] = useState(false);
   const [shopName, setShopName] = useState<string | null>(null);
+  const [wishlistSaved, setWishlistSaved] = useState(false);
 
   const product = products.find((p) => p.title.toLowerCase().replace(/\s+/g, "-") === slug);
 
@@ -25,6 +29,10 @@ export default function ProductDetail() {
       if (res.success && res.data) setShopName((res.data as Record<string, unknown>).shopName as string);
     }).catch(() => {});
   }, [product?.vendorId]);
+
+  useEffect(() => {
+    if (product) setWishlistSaved(isInWishlist(String(product.id)));
+  }, [product]);
 
   if (!product) {
     return (
@@ -40,9 +48,27 @@ export default function ProductDetail() {
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 4);
 
-  const handleAddToCart = () => {
-    setAddedToCart(true);
-    setTimeout(() => setAddedToCart(false), 2000);
+  const handleAddToCart = async () => {
+    if (!isAuthenticated()) {
+      router.push("/auth/signin");
+      return;
+    }
+    setAddingToCart(true);
+    const imageUrl = typeof product.src === "string" ? product.src : product.src.src;
+    const res = await api.cart.addItem({
+      productId: String(product.id),
+      title: product.title,
+      price: product.price || "0",
+      quantity: 1,
+      image: imageUrl,
+      size: selectedSize || undefined,
+      color: selectedColor || undefined,
+    });
+    if (res.success) {
+      setAddedToCart(true);
+      setTimeout(() => setAddedToCart(false), 2000);
+    }
+    setAddingToCart(false);
   };
 
   return (
@@ -137,16 +163,36 @@ export default function ProductDetail() {
           <div className="flex items-center gap-4 pt-4">
             <button
               onClick={handleAddToCart}
+              disabled={addingToCart}
               className={`btn flex-1 gap-2 ${addedToCart ? "btn-success" : "btn-primary"}`}
             >
-              {addedToCart ? (
+              {addingToCart ? (
+                <span className="loading loading-spinner loading-sm" />
+              ) : addedToCart ? (
                 <><FaCheck /> Added to Cart</>
               ) : (
                 <><FaShoppingCart /> Add to Cart</>
               )}
             </button>
-            <button className="btn btn-outline btn-square" aria-label="Add to Wishlist">
-              <CiHeart className="text-xl" />
+            <button
+              onClick={() => {
+                const imageUrl = typeof product.src === "string" ? product.src : product.src.src;
+                toggleWishlist({
+                  productId: String(product.id),
+                  title: product.title,
+                  price: product.price || "0",
+                  image: imageUrl,
+                });
+                setWishlistSaved(!wishlistSaved);
+              }}
+              className="btn btn-outline btn-square"
+              aria-label={wishlistSaved ? "Remove from Wishlist" : "Add to Wishlist"}
+            >
+              {wishlistSaved ? (
+                <FaHeart className="text-xl text-red-500" />
+              ) : (
+                <CiHeart className="text-xl" />
+              )}
             </button>
           </div>
         </div>
