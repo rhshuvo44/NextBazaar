@@ -37,7 +37,7 @@ const ProductGrid = ({
   return (
     <div className={gridCols}>
       {products.map((p, index) => (
-        <ProductCard key={index} {...p} wishlist />
+        <ProductCard key={index} {...p} wishlist staggerIndex={index} />
       ))}
     </div>
   );

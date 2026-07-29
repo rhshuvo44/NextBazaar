@@ -3,6 +3,7 @@
 import { BannerSectionProps, PolymorphicButtonProps } from "@/types";
 import Image from "next/image";
 import PolymorphicButton from "./PolymorphicButton";
+import useInView from "@/lib/useInView";
 
 const BannerSection = ({
   image,
@@ -16,11 +17,13 @@ const BannerSection = ({
   buttons?: PolymorphicButtonProps[];
   minHeight?: string;
 }) => {
+  const { ref, isVisible } = useInView();
+
   return (
     <section
+      ref={ref}
       className={`relative min-h-[95vh] ${minHeight} sm:h-[80vh] overflow-hidden flex p-4 text-white mt-16`}
     >
-      {/* Background wrapper */}
       <div className="absolute inset-0 ">
         <Image
           src={image}
@@ -30,44 +33,34 @@ const BannerSection = ({
           className="object-cover"
         />
 
-        {/* Overlay */}
         <div
           className={`absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70`}
           style={{ opacity: overlayOpacity }}
         />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 text-center px-4 flex flex-col items-start justify-center">
-        <h3 className="text-[32px] font-light mb-2 ">{brand}</h3>
-        {/* Title */}
+        <h3 className={`text-[32px] font-light mb-2 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
+            style={{ animationDelay: "0.05s", animationFillMode: "both" }}>{brand}</h3>
         <h1
-          className="text-xl sm:text-4xl md:text-5xl lg:text-8xl  font-extrabold mb-4 drop-shadow-lg animate-fadeIn text-left py-3"
-          data-aos="fade-up"
-          data-aos-duration="1000"
-          data-aos-delay="200"
+          className={`text-xl sm:text-4xl md:text-5xl lg:text-8xl font-extrabold mb-4 drop-shadow-lg text-left py-3 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
+          style={{ animationDelay: "0.15s", animationFillMode: "both" }}
         >
           {title}
         </h1>
-        {/* Subtitle */}
         {subtitle && (
           <h3
-            className="text-md sm:text-lg md:text-xl mb-6 font-light"
-            data-aos="fade-up"
-            data-aos-duration="1200"
-            data-aos-delay="400"
+            className={`text-md sm:text-lg md:text-xl mb-6 font-light ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
+            style={{ animationDelay: "0.25s", animationFillMode: "both" }}
           >
             {subtitle}
           </h3>
         )}
 
-        {/* Buttons */}
         {buttons.length > 0 && (
           <div
-            className="flex flex-wrap items-center justify-center gap-4 sm:flex-col md:flex-row md:gap-6"
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-delay="500"
+            className={`flex flex-wrap items-center justify-center gap-4 sm:flex-col md:flex-row md:gap-6 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
+            style={{ animationDelay: "0.35s", animationFillMode: "both" }}
           >
             {buttons.map((btn, idx) => (
               <PolymorphicButton

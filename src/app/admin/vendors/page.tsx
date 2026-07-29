@@ -1,55 +1,79 @@
 "use client";
-import { useEffect, useState } from "react";
-import { api, getUser } from "@/lib/api";
-import { useRouter } from "next/navigation";
+
+import { useEffect, useState, useCallback } from "react";
+import { api } from "@/lib/api";
+import { FaExclamationTriangle } from "react-icons/fa";
+
+interface Vendor {
+  id: string;
+  name: string;
+  email: string;
+  shopName: string;
+  shopDescription: string;
+  vendorStatus: string;
+  createdAt: string;
+}
+
+const statusColor: Record<string, string> = {
+  PENDING: "badge-warning",
+  APPROVED: "badge-success",
+  SUSPENDED: "badge-error",
+};
 
 export default function AdminVendorsPage() {
-  const router = useRouter();
-  const user = getUser();
-  const [vendors, setVendors] = useState<Record<string, unknown>[]>([]);
+  const [vendors, setVendors] = useState<Vendor[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("");
+  const [error, setError] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
 
-  const fetchVendors = () => {
+  const fetchVendors = useCallback(() => {
     api.admin.vendors.list(filter || undefined).then((res) => {
-      if (res.success && res.data) setVendors(res.data as Record<string, unknown>[]);
+      if (res.success && res.data) {
+        setVendors(res.data);
+      } else {
+        setError(res.error || "Failed to load vendors");
+      }
       setLoading(false);
     });
-  };
-
-  useEffect(() => {
-    if (!user || user.role !== "ADMIN") { router.push("/"); return; }
-    fetchVendors();
   }, [filter]);
 
-  const handleApprove = async (id: string) => {
-    await api.admin.vendors.approve(id);
+  useEffect(() => {
     fetchVendors();
+  }, [fetchVendors]);
+
+  const handleApprove = async (id: string) => {
+    const res = await api.admin.vendors.approve(id);
+    if (res.success) {
+      setSuccessMsg("Vendor approved");
+      fetchVendors();
+      setTimeout(() => setSuccessMsg(""), 3000);
+    } else {
+      setError(res.error || "Approve failed");
+    }
   };
 
   const handleSuspend = async (id: string) => {
-    await api.admin.vendors.suspend(id);
-    fetchVendors();
-  };
-
-  if (loading) return <div className="p-10 text-center">Loading vendors...</div>;
-
-  const statusColor: Record<string, string> = {
-    PENDING: "badge-warning",
-    APPROVED: "badge-success",
-    SUSPENDED: "badge-error",
+    const res = await api.admin.vendors.suspend(id);
+    if (res.success) {
+      setSuccessMsg("Vendor suspended");
+      fetchVendors();
+      setTimeout(() => setSuccessMsg(""), 3000);
+    } else {
+      setError(res.error || "Suspend failed");
+    }
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold">Vendors</h1>
-        <div className="flex gap-2">
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <h1 className="text-2xl sm:text-3xl font-bold">Vendors ({vendors.length})</h1>
+        <div className="flex gap-2 flex-wrap">
           {["", "PENDING", "APPROVED", "SUSPENDED"].map((s) => (
             <button
               key={s}
               onClick={() => setFilter(s)}
-              className={`btn btn-sm ${filter === s ? "btn-primary" : "btn-outline"}`}
+              className={`btn btn-xs ${filter === s ? "btn-primary" : "btn-outline"}`}
             >
               {s || "All"}
             </button>
@@ -57,43 +81,62 @@ export default function AdminVendorsPage() {
         </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Store</th>
-              <th>Email</th>
-              <th>Status</th>
-              <th>Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {vendors.map((v) => (
-              <tr key={v.id as string}>
-                <td>
-                  <p className="font-medium">{v.shopName as string}</p>
-                  {(v.name as string) && <p className="text-sm text-gray-500">{v.name as string}</p>}
-                </td>
-                <td>{v.email as string}</td>
-                <td><span className={`badge ${statusColor[v.vendorStatus as string] || "badge-ghost"}`}>{v.vendorStatus as string}</span></td>
-                <td>{new Date(v.createdAt as string).toLocaleDateString()}</td>
-                <td className="flex gap-2">
-                  {v.vendorStatus === "PENDING" && (
-                    <button onClick={() => handleApprove(v.id as string)} className="btn btn-sm btn-success">Approve</button>
-                  )}
-                  {v.vendorStatus === "APPROVED" && (
-                    <button onClick={() => handleSuspend(v.id as string)} className="btn btn-sm btn-error">Suspend</button>
-                  )}
-                  {v.vendorStatus === "SUSPENDED" && (
-                    <button onClick={() => handleApprove(v.id as string)} className="btn btn-sm btn-success">Reactivate</button>
-                  )}
-                </td>
+      {error && (
+        <div className="alert alert-error text-sm">
+          <FaExclamationTriangle />
+          <span>{error}</span>
+          <button onClick={() => setError("")} className="btn btn-ghost btn-xs">Dismiss</button>
+        </div>
+      )}
+      {successMsg && <div className="alert alert-success text-sm">{successMsg}</div>}
+
+      {loading ? (
+        <div className="space-y-3">
+          {[1, 2, 3, 4].map((i) => <div key={i} className="skeleton h-14 w-full rounded-lg" />)}
+        </div>
+      ) : vendors.length === 0 ? (
+        <div className="text-center py-16 text-base-content/60">
+          <p className="text-lg font-medium">No vendors found</p>
+        </div>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="table table-zebra">
+            <thead>
+              <tr>
+                <th>Store</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {vendors.map((v) => (
+                <tr key={v.id}>
+                  <td>
+                    <p className="font-medium">{v.shopName}</p>
+                    {v.name && <p className="text-sm text-base-content/60">{v.name}</p>}
+                  </td>
+                  <td className="text-sm">{v.email}</td>
+                  <td><span className={`badge badge-sm ${statusColor[v.vendorStatus] || "badge-ghost"}`}>{v.vendorStatus}</span></td>
+                  <td className="text-sm text-base-content/60">{new Date(v.createdAt).toLocaleDateString()}</td>
+                  <td className="flex gap-2">
+                    {v.vendorStatus === "PENDING" && (
+                      <button onClick={() => handleApprove(v.id)} className="btn btn-xs btn-success">Approve</button>
+                    )}
+                    {v.vendorStatus === "APPROVED" && (
+                      <button onClick={() => handleSuspend(v.id)} className="btn btn-xs btn-error">Suspend</button>
+                    )}
+                    {v.vendorStatus === "SUSPENDED" && (
+                      <button onClick={() => handleApprove(v.id)} className="btn btn-xs btn-success">Reactivate</button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }

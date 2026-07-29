@@ -2,6 +2,7 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 // Import Swiper styles
 import NavbarFooterWrapper from "@/components/layout/NavbarFooterWrapper";
+import ReduxProvider from "@/lib/ReduxProvider";
 import "swiper/css";
 
 export const metadata: Metadata = {
@@ -18,7 +19,9 @@ export default function RootLayout({
     <html lang="en">
       <head></head>
       <body className={`antialiased`}>
-        <NavbarFooterWrapper>{children}</NavbarFooterWrapper>
+        <ReduxProvider>
+          <NavbarFooterWrapper>{children}</NavbarFooterWrapper>
+        </ReduxProvider>
       </body>
     </html>
   );

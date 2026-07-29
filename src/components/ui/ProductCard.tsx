@@ -1,12 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { ProductCardProps } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart, FaLongArrowAltRight } from "react-icons/fa";
-import { isInWishlist, toggleWishlist } from "@/lib/wishlist";
+import { useAppDispatch, useAppSelector } from "@/lib/store";
+import { toggleWishlistItem } from "@/lib/slices/wishlistSlice";
+
+const staggerClass = [
+  "",
+  "animate-delay-1",
+  "animate-delay-2",
+  "animate-delay-3",
+  "animate-delay-4",
+  "animate-delay-5",
+  "animate-delay-6",
+  "animate-delay-7",
+  "animate-delay-8",
+];
 
 const ProductCard = ({
   id,
@@ -19,32 +31,31 @@ const ProductCard = ({
   wishlist,
   discount,
   shopName,
-}: ProductCardProps) => {
-  const [saved, setSaved] = useState(false);
+  staggerIndex,
+}: ProductCardProps & { staggerIndex?: number }) => {
+  const dispatch = useAppDispatch();
+  const items = useAppSelector((s) => s.wishlist.items);
+  const saved = id ? items.some((i) => i.productId === String(id)) : false;
   const slug = title.toLowerCase().replace(/\s+/g, "-");
   const linkHref = href || `/shop/${slug}`;
-
-  useEffect(() => {
-    if (wishlist && id) setSaved(isInWishlist(String(id)));
-  }, [wishlist, id]);
+  const animDelay = staggerIndex !== undefined ? staggerClass[staggerIndex % staggerClass.length] : "";
 
   const handleToggleWishlist = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     if (!id) return;
     const imageUrl = typeof src === "string" ? src : src.src;
-    toggleWishlist({
+    dispatch(toggleWishlistItem({
       productId: String(id),
       title,
       price: price || "0",
       image: imageUrl,
-    });
-    setSaved(!saved);
+    }));
   };
 
   return (
-    <Link href={linkHref} className="block">
-      <div className="bg-base-100 shadow-sm relative rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 cursor-pointer group">
+    <Link href={linkHref} className={`block animate-fade-in-up ${animDelay}`}>
+      <div className="bg-base-100 shadow-sm relative rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1.5 cursor-pointer group">
         {wishlist && (
           <button
             aria-label={saved ? "Remove from Wishlist" : "Add to Wishlist"}
