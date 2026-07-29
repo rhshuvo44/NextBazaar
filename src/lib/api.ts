@@ -101,6 +101,16 @@ export const api = {
     },
     getById: (id: string) => request<unknown>(`/products/${id}`),
   },
+  cart: {
+    get: () => request<{ items: { productId: string; title: string; price: string; quantity: number; lineTotal: number; image?: string; size?: string; color?: string }[]; subtotal: number; shipping: number; tax: number; total: number; itemCount: number }>("/cart"),
+    addItem: (body: { productId: string; title: string; price: string; quantity: number; image?: string; size?: string; color?: string }) =>
+      request<{ items: { productId: string; title: string; price: string; quantity: number; lineTotal: number; image?: string; size?: string; color?: string }[]; subtotal: number; shipping: number; tax: number; total: number; itemCount: number }>("/cart/items", { method: "POST", body: JSON.stringify(body) }),
+    updateQuantity: (productId: string, quantity: number) =>
+      request<{ items: { productId: string; title: string; price: string; quantity: number; lineTotal: number; image?: string; size?: string; color?: string }[]; subtotal: number; shipping: number; tax: number; total: number; itemCount: number }>(`/cart/items/${productId}`, { method: "PATCH", body: JSON.stringify({ quantity }) }),
+    removeItem: (productId: string) =>
+      request<{ items: { productId: string; title: string; price: string; quantity: number; lineTotal: number; image?: string; size?: string; color?: string }[]; subtotal: number; shipping: number; tax: number; total: number; itemCount: number }>(`/cart/items/${productId}`, { method: "DELETE" }),
+    clear: () => request<{ message: string }>("/cart", { method: "DELETE" }),
+  },
   orders: {
     create: (body: { items: { productId: string; title: string; price: string; quantity: number }[]; total: string }) =>
       request<unknown>("/orders", { method: "POST", body: JSON.stringify(body) }),

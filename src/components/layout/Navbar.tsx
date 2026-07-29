@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   FaBars,
   FaHeart,
@@ -11,13 +11,22 @@ import {
   FaUser,
   FaStore,
 } from "react-icons/fa";
-import { getUser } from "@/lib/api";
+import { getUser, api } from "@/lib/api";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
   const pathname = usePathname();
   const user = getUser();
+
+  useEffect(() => {
+    if (user) {
+      api.cart.get().then((res) => {
+        if (res.success && res.data) setCartCount(res.data.itemCount);
+      });
+    }
+  }, [user]);
 
   const navLinks = [
     { path: "/", label: "Home" },
@@ -109,9 +118,11 @@ export default function Navbar() {
                   <FaShoppingCart className="text-xl cursor-pointer " />
                 </div>
               </Link>
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
-                2
-              </span>
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
+                  {cartCount}
+                </span>
+              )}
             </div>
 
             <Link href={user ? "/account" : "/auth/signin"}>
@@ -198,9 +209,11 @@ export default function Navbar() {
                   <FaShoppingCart className="text-xl cursor-pointer hover:text-blue-500" />
                 </div>
               </Link>
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
-                2
-              </span>
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
+                  {cartCount}
+                </span>
+              )}
             </div>
 
             <Link href={user ? "/account" : "/auth/signin"} onClick={() => setMobileMenuOpen(false)}>

@@ -71,6 +71,7 @@ export interface SavingZoneCardProps {
 }
 
 export type ProductCardProps = {
+    id?: number;
     src: string | StaticImageData;
     title: string;
     href?: string;
@@ -100,6 +101,38 @@ export interface Product {
     discount?: number;
     vendorId?: string;
     shopName?: string;
+}
+
+export interface CartItem {
+  productId: string;
+  title: string;
+  price: string;
+  quantity: number;
+  lineTotal: number;
+  image?: string;
+  size?: string;
+  color?: string;
+}
+
+export interface CartResponse {
+  items: CartItem[];
+  subtotal: number;
+  shipping: number;
+  tax: number;
+  total: number;
+  itemCount: number;
+}
+
+export interface WishlistItem {
+  productId: string;
+  title: string;
+  price: string;
+  image?: string;
+  addedAt: string;
+}
+
+export interface WishlistResponse {
+  items: WishlistItem[];
 }
 
 export type SortOption = "New" | "Recommended";
