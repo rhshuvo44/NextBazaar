@@ -11,10 +11,16 @@ export default function SavingZoneCard({
   className,
 }: SavingZoneCardProps) {
   return (
-    <div className={`relative h-96 w-full ${className}`}>
+    <div className={`relative h-96 w-full overflow-hidden rounded-xl group ${className}`}>
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <Image src={src} alt={title} fill priority className="object-cover" />
+        <Image
+          src={src}
+          alt={title}
+          fill
+          priority
+          className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
       </div>
 
@@ -26,7 +32,7 @@ export default function SavingZoneCard({
           <h4 className="text-lg opacity-90">{description}</h4>
 
           <div className="py-4">
-            <FaArrowDown className="text-4xl animate-bounce" />
+            <FaArrowDown className="text-4xl animate-bounce group-hover:text-primary transition-colors duration-300" />
           </div>
 
           <PolymorphicButton

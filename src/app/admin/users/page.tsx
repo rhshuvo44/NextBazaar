@@ -15,7 +15,8 @@ interface AdminUser {
 }
 
 const roleColor: Record<string, string> = {
-  ADMIN: "badge-error",
+  SUPER_ADMIN: "badge-error",
+  ADMIN: "badge-warning",
   VENDOR: "badge-info",
   CUSTOMER: "badge-ghost",
 };

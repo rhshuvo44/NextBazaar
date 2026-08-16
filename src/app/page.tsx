@@ -15,15 +15,15 @@ export default function Home() {
     <>
       <Banner />
       <main className="max-w-7xl mx-auto p-10 w-full">
-        <AnimateOnScroll as="section"><Deal /></AnimateOnScroll>
-        <AnimateOnScroll as="section"><NewArrival /></AnimateOnScroll>
-        <AnimateOnScroll as="section"><BigSavingZone /></AnimateOnScroll>
-        <AnimateOnScroll as="section"><Fashion /></AnimateOnScroll>
-        <AnimateOnScroll as="section"><CategoriesMen /></AnimateOnScroll>
-        <AnimateOnScroll as="section"><CategoriesWomen /></AnimateOnScroll>
-        <AnimateOnScroll as="section"><BrandsDeal /></AnimateOnScroll>
-        <AnimateOnScroll as="section"><Limelight /></AnimateOnScroll>
-        <AnimateOnScroll as="section"><Feedback /></AnimateOnScroll>
+        <AnimateOnScroll as="section" direction="up"><Deal /></AnimateOnScroll>
+        <AnimateOnScroll as="section" direction="left"><NewArrival /></AnimateOnScroll>
+        <AnimateOnScroll as="section" direction="up"><BigSavingZone /></AnimateOnScroll>
+        <AnimateOnScroll as="section" direction="right"><Fashion /></AnimateOnScroll>
+        <AnimateOnScroll as="section" direction="up"><CategoriesMen /></AnimateOnScroll>
+        <AnimateOnScroll as="section" direction="up"><CategoriesWomen /></AnimateOnScroll>
+        <AnimateOnScroll as="section" direction="zoom"><BrandsDeal /></AnimateOnScroll>
+        <AnimateOnScroll as="section" direction="up"><Limelight /></AnimateOnScroll>
+        <AnimateOnScroll as="section" direction="right"><Feedback /></AnimateOnScroll>
       </main>
     </>
   );

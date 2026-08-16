@@ -33,27 +33,31 @@ const Feedback = () => {
         >
           {feedbacks.map(({ src, name, description, rating }, index) => (
             <SwiperSlide key={index}>
-              <div className="h-72 flex flex-col shadow-2xl p-4">
+              <div className="h-72 flex flex-col bg-base-100 shadow-soft hover:shadow-soft-lg transition-shadow duration-300 rounded-2xl p-4 border border-base-300">
                 <div className="flex flex-row justify-between">
                   <div className="avatar">
-                    <div className="w-16 rounded">
+                    <div className="w-16 rounded-full ring-2 ring-primary/30 ring-offset-2 ring-offset-base-100 transition-transform duration-300 hover:scale-105">
                       <Image
                         src={src}
                         alt={`${name} avatar`}
                         width={64}
                         height={64}
-                        className="rounded"
+                        className="rounded-full"
                       />
                     </div>
                   </div>
-                  <p className="flex">
-                    {Array.from({ length: rating }, (_, index) => (
-                      <FaStar key={index} className="text-yellow-300" />
+                  <p className="flex gap-0.5">
+                    {Array.from({ length: rating }, (_, i) => (
+                      <FaStar
+                        key={i}
+                        className="text-yellow-300 animate-pop-in"
+                        style={{ animationDelay: `${0.08 * i}s` }}
+                      />
                     ))}
                   </p>
                 </div>
                 <div className="mt-3">
-                  <h3 className=" mb-2">{name}</h3>
+                  <h3 className=" mb-2 font-semibold">{name}</h3>
                   <p className="text-left text-sm">{description}</p>
                 </div>
               </div>

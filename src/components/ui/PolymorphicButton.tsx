@@ -26,22 +26,22 @@ const PolymorphicButton = forwardRef<
     ref
   ) => {
     const baseClass =
-      "relative inline-flex items-center gap-2 px-8 py-3 rounded-xl font-semibold transition-all duration-300 overflow-hidden group capitalize cursor-pointer";
+      "relative inline-flex items-center gap-2 px-8 py-3 rounded-xl font-semibold transition-all duration-300 overflow-hidden group capitalize cursor-pointer btn-shine";
 
     // Conditionally set the class based on color and variant
     const variantClass = {
       primary: {
         solid:
-          "bg-white text-black  shadow-md hover:shadow-xl hover:-translate-y-1",
+          "bg-white text-black shadow-soft hover:shadow-soft-lg hover:-translate-y-1",
         outline:
-          "border border-white  hover:bg-black hover:text-white",
+          "border border-white hover:bg-black hover:text-white",
         submit:
-          "border border-white  hover:bg-black hover:text-white",
+          "border border-white hover:bg-black hover:text-white",
       },
       info: {
         solid:
-          "bg-black  shadow-md hover:shadow-xl hover:-translate-y-1",
-        outline: "border border-black  hover:bg-white hover:text-black",
+          "bg-black shadow-soft hover:shadow-soft-lg hover:-translate-y-1",
+        outline: "border border-black hover:bg-white hover:text-black",
       },
     };
 

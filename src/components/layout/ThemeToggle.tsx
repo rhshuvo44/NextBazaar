@@ -24,7 +24,13 @@ export default function ThemeToggle() {
       className="btn btn-circle hover:scale-110 transition-transform duration-200"
       aria-label="Toggle Theme"
     >
-      {theme === "light" ? "🌙" : "☀️"}
+      <span
+        key={theme}
+        className="block animate-pop-in"
+        aria-hidden="true"
+      >
+        {theme === "light" ? "🌙" : "☀️"}
+      </span>
     </button>
   );
 }

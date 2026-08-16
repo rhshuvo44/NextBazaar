@@ -30,7 +30,7 @@ const BannerSection = ({
           alt={typeof title === "string" ? title : "Banner image"}
           fill
           priority
-          className="object-cover"
+          className="object-cover animate-ken-burns"
         />
 
         <div
@@ -40,10 +40,19 @@ const BannerSection = ({
       </div>
 
       <div className="relative z-10 text-center px-4 flex flex-col items-start justify-center">
-        <h3 className={`text-[32px] font-light mb-2 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
-            style={{ animationDelay: "0.05s", animationFillMode: "both" }}>{brand}</h3>
+        {brand && (
+          <span
+            className={`inline-flex items-center gap-2 mb-2 px-4 py-1.5 rounded-full border border-white/30 bg-white/10 backdrop-blur-md text-sm font-medium tracking-wide uppercase ${
+              isVisible ? "animate-fade-in-up" : "opacity-0"
+            }`}
+            style={{ animationDelay: "0.05s", animationFillMode: "both" }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            {brand}
+          </span>
+        )}
         <h1
-          className={`text-xl sm:text-4xl md:text-5xl lg:text-8xl font-extrabold mb-4 drop-shadow-lg text-left py-3 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
+          className={`text-gradient text-xl sm:text-4xl md:text-5xl lg:text-8xl font-extrabold mb-4 drop-shadow-lg text-left py-3 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
           style={{ animationDelay: "0.15s", animationFillMode: "both" }}
         >
           {title}

@@ -43,10 +43,16 @@ const NewArrival = () => {
         </Swiper>
 
         {/* Custom Nav Buttons */}
-        <button className="custom-prev absolute top-1/2 -left-4 z-10 text-xl text-base-content cursor-pointer">
+        <button
+          className="custom-prev absolute top-1/2 -left-4 z-10 text-base-content cursor-pointer p-3 rounded-full bg-base-100 shadow-soft hover:shadow-soft-lg hover:text-primary hover:scale-110 active:scale-95 transition-all duration-300"
+          aria-label="Previous products"
+        >
           <FaArrowLeft />
         </button>
-        <button className="custom-next absolute top-1/2 -right-4 z-10 text-xl text-base-content cursor-pointer">
+        <button
+          className="custom-next absolute top-1/2 -right-4 z-10 text-base-content cursor-pointer p-3 rounded-full bg-base-100 shadow-soft hover:shadow-soft-lg hover:text-primary hover:scale-110 active:scale-95 transition-all duration-300"
+          aria-label="Next products"
+        >
           <FaArrowRight />
         </button>
       </div>
