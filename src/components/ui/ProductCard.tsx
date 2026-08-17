@@ -55,23 +55,25 @@ const ProductCard = ({
 
   return (
     <Link href={linkHref} className={`block animate-fade-in-up ${animDelay}`}>
-      <div className="bg-base-100 shadow-sm relative rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1.5 cursor-pointer group">
+      <div className="bg-base-100 shadow-soft relative rounded-xl overflow-hidden transition-all duration-300 ease-in-out hover:shadow-soft-lg hover:-translate-y-1.5 cursor-pointer group">
         {wishlist && (
           <button
             aria-label={saved ? "Remove from Wishlist" : "Add to Wishlist"}
             onClick={handleToggleWishlist}
-            className="bg-white absolute top-3 right-3 rounded-full p-2 shadow transition-colors duration-300 hover:bg-red-100 z-10 cursor-pointer"
+            className="bg-white absolute top-3 right-3 rounded-full p-2 shadow transition-colors duration-300 hover:bg-red-100 z-10 cursor-pointer hover:scale-110 active:scale-95"
           >
-            {saved ? (
-              <FaHeart className="text-lg text-red-500" />
-            ) : (
-              <CiHeart className="text-lg text-black transition-colors duration-300 hover:text-red-500" />
-            )}
+            <span key={saved ? "saved" : "unsaved"} className="block animate-pop-in">
+              {saved ? (
+                <FaHeart className="text-lg text-red-500" />
+              ) : (
+                <CiHeart className="text-lg text-black transition-colors duration-300 hover:text-red-500" />
+              )}
+            </span>
           </button>
         )}
 
         {discount && (
-          <span className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">
+          <span className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10 shadow-lg">
             -{discount}%
           </span>
         )}
@@ -82,8 +84,9 @@ const ProductCard = ({
             alt={title}
             width={500}
             height={500}
-            className="w-full h-full object-cover rounded-xl transition-transform duration-500 ease-in-out group-hover:scale-110"
+            className="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out group-hover:scale-110"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         </figure>
 
         <div className="p-3 mt-2">
@@ -91,7 +94,7 @@ const ProductCard = ({
             <>
               <div className="flex justify-between items-center">
                 <h2 className="card-title text-base font-semibold">{title}</h2>
-                <FaLongArrowAltRight className="text-gray-600 hover:text-primary transition-colors duration-300" />
+                <FaLongArrowAltRight className="text-gray-600 transition-all duration-300 group-hover:text-primary group-hover:translate-x-1" />
               </div>
               <p className="text-sm text-gray-500 mt-1">Explore Now!</p>
             </>
@@ -109,7 +112,7 @@ const ProductCard = ({
                         <p className="text-gray-400 text-xs line-through">${price}</p>
                       </>
                     ) : (
-                      <p className="bg-accent text-white px-2 py-0.5 rounded-md font-bold text-sm transition-all duration-300 hover:bg-accent/80">
+                      <p className="bg-primary text-primary-content px-2 py-0.5 rounded-md font-bold text-sm transition-all duration-300 group-hover:shadow-lg">
                         ${price}
                       </p>
                     )}

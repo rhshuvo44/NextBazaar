@@ -1,9 +1,22 @@
 import "@/app/globals.css";
 import type { Metadata } from "next";
+import { Inter, Sora } from "next/font/google";
 // Import Swiper styles
 import NavbarFooterWrapper from "@/components/layout/NavbarFooterWrapper";
 import ReduxProvider from "@/lib/ReduxProvider";
 import "swiper/css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const sora = Sora({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "NextBazaar - Ecommerce Website Template (Apparels)",
@@ -16,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${sora.variable}`}>
       <head></head>
       <body className={`antialiased`}>
         <ReduxProvider>

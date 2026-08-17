@@ -20,11 +20,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const user = getUser();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  useEffect(() => {
-    if (!user || user.role !== "ADMIN") router.push("/");
-  }, [user, router]);
+  const isAdmin = !!user && (user.role === "ADMIN" || user.role === "SUPER_ADMIN");
 
-  if (!user || user.role !== "ADMIN") return null;
+  useEffect(() => {
+    if (!isAdmin) router.push("/");
+  }, [isAdmin, router]);
+
+  if (!isAdmin) return null;
 
   return (
     <div className="min-h-screen flex flex-col mt-16">
